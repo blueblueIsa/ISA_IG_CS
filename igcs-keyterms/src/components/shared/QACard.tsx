@@ -13,7 +13,15 @@ export const QACard: React.FC<QACardProps> = ({ question }) => {
       <div className="qa-question">{question.question}</div>
       <div className="qa-meta">
         {question.paper} · {question.topic}
+        {typeof question.marks === 'number' ? ` · ${question.marks} marks` : ''}
       </div>
+      {Array.isArray(question.tags) && question.tags.length > 0 && (
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
+          {question.tags.map((t, i) => (
+            <span key={i} className="chip">{t}</span>
+          ))}
+        </div>
+      )}
       <div className={`qa-answer ${showAnswer ? 'show' : ''}`}>
         {question.answer}
       </div>

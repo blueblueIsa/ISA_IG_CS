@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { qaData } from '../../data/qa';
 import { units } from '../../data/units';
 import { QACard } from '../../components/shared/QACard';
+import { useSearchParams } from 'react-router-dom';
 
 export const QAView: React.FC = () => {
-  const [selectedUnitId, setSelectedUnitId] = useState<string>(units[0].id);
-  const [selectedTopic, setSelectedTopic] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedUnitId, setSelectedUnitId] = useState<string>(searchParams.get('unit') || units[0].id);
+  const [selectedTopic, setSelectedTopic] = useState<string>(searchParams.get('topic') || '');
+  const [keyword, setKeyword] = useState<string>(searchParams.get('q') || '');
 
   const unitQA = qaData[selectedUnitId] || {};
   const topics = Object.keys(unitQA);
   
-  const filteredQuestions = selectedTopic 
-    ? (unitQA[selectedTopic] || [])
-    : Object.values(unitQA).flat();
+  const filteredQuestions = (selectedTopic ? (unitQA[selectedTopic] || []) : Object.values(unitQA).flat()).filter(q => {
+    const k = keyword.trim().toLowerCase();
+    if (!k) return true;
+    const inText = q.question.toLowerCase().includes(k) || q.answer.toLowerCase().includes(k);
+    const inKeywords = Array.isArray(q.keywords) && q.keywords.some(w => w.toLowerCase().includes(k));
+    return inText || inKeywords;
+  });
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    params.set('unit', selectedUnitId);
+    if (selectedTopic) params.set('topic', selectedTopic);
+    if (keyword) params.set('q', keyword);
+    setSearchParams(params, { replace: true });
+  }, [selectedUnitId, selectedTopic, keyword, setSearchParams]);
 
   return (
     <div>
@@ -23,11 +38,18 @@ export const QAView: React.FC = () => {
         </div>
 
         <div className="filters">
+          <input 
+            type="text"
+            placeholder="Keyword..."
+            value={keyword}
+            onChange={e => setKeyword(e.target.value)}
+          />
           <select 
             value={selectedUnitId} 
             onChange={e => {
               setSelectedUnitId(e.target.value);
               setSelectedTopic('');
+              setKeyword('');
             }}
           >
             {units.map(u => (

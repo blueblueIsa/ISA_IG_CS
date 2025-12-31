@@ -23,6 +23,9 @@ export interface Question {
   topic: string;
   source: string;
   link: string;
+  tags?: string[];
+  marks?: number;
+  keywords?: string[];
 }
 
 export type QAData = Record<string, Record<string, Question[]>>;

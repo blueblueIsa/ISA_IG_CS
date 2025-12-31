@@ -49,3 +49,19 @@ Deploy to Vercel:
 ```bash
 npx vercel
 ```
+
+### Fix 404 on deep links (SPA routing)
+- This app uses client-side routing (`BrowserRouter`). On Vercel, add a catch-all rewrite to serve `index.html` for non-file routes.
+
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+Redeploy:
+```bash
+npx vercel --prod
+```

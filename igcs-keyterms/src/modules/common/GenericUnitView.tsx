@@ -3,12 +3,14 @@ import type { Unit, ViewMode } from '../../types';
 import { TermCard } from '../../components/shared/TermCard';
 import { Flashcard } from '../../components/shared/Flashcard';
 import { Shuffle, BookOpen, Layers } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface GenericUnitViewProps {
   unit: Unit;
 }
 
 export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [topic, setTopic] = useState('');
   const [letter, setLetter] = useState('');
@@ -101,7 +103,17 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
       {viewMode === 'list' ? (
         <div className="terms">
           {filteredTerms.map((term, i) => (
-            <TermCard key={i} term={term} />
+            <TermCard 
+              key={i} 
+              term={term} 
+              onViewQA={(keyword) => {
+                const params = new URLSearchParams();
+                params.set('unit', unit.id);
+                params.set('topic', term.topic);
+                params.set('q', keyword);
+                navigate(`/qa?${params.toString()}`);
+              }}
+            />
           ))}
           {filteredTerms.length === 0 && (
             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: 'var(--muted)' }}>

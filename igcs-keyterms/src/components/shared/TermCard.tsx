@@ -3,9 +3,10 @@ import type { Term } from '../../types';
 
 interface TermCardProps {
   term: Term;
+  onViewQA?: (keyword: string) => void;
 }
 
-export const TermCard: React.FC<TermCardProps> = ({ term }) => {
+export const TermCard: React.FC<TermCardProps> = ({ term, onViewQA }) => {
   return (
     <div className="term-card">
       <h3 className="term-title">{term.term}</h3>
@@ -35,6 +36,13 @@ export const TermCard: React.FC<TermCardProps> = ({ term }) => {
       <div className="detail" style={{ fontSize: '11px', marginTop: '8px', opacity: 0.6 }}>
         {term.topic}
       </div>
+      {onViewQA && (
+        <div style={{ marginTop: 10 }}>
+          <button className="confusions-toggle" onClick={() => onViewQA(term.term)}>
+            Related Q&A
+          </button>
+        </div>
+      )}
     </div>
   );
 };
