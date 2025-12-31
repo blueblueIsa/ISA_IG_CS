@@ -269,11 +269,32 @@ nav .group {
   font-size: 14px;
   margin: 0;
   display: none;
+  background: #f9fafb;
+  padding: 8px;
+  border-radius: 8px;
+  line-height: 1.6;
 }
 
 .qa-answer.show {
   display: block;
 }
+
+.qa-line {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-size: 14px;
+}
+.qa-line-easy { border-left-color: #22c55e; }   /* green */
+.qa-line-medium { border-left-color: #f59e0b; } /* amber */
+.qa-line-hard { border-left-color: #ef4444; }   /* red */
+
+.qa-difficulty-easy { background: #dcfce7; color: #166534; }
+.qa-difficulty-medium { background: #fef3c7; color: #92400e; }
+.qa-difficulty-hard { background: #fee2e2; color: #991b1b; }
 
 .qa-actions {
   display: flex;

@@ -207,5 +207,202 @@ export const qaData: QAData = {
         keywords: ["packet switching", "circuit switching"]
       }
     ]
+  },
+  "cs-3": {
+    "Architecture": [
+      {
+        question: "Name the three buses in Von Neumann architecture and state their roles.",
+        answer: "Data bus carries data; Address bus carries memory addresses; Control bus carries control signals.",
+        paper: "2023 May/June Paper 11",
+        topic: "Architecture",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state", "explain"],
+        marks: 3,
+        keywords: ["data bus", "address bus", "control bus", "von neumann"]
+      },
+      {
+        question: "Explain the function of the ALU and Control Unit in a CPU.",
+        answer: "The ALU performs arithmetic and logic operations; the Control Unit fetches, decodes and coordinates execution of instructions.",
+        paper: "2024 Oct/Nov Paper 12",
+        topic: "Architecture",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["ALU", "control unit", "CPU", "fetch-decode-execute"]
+      }
+    ],
+    "Memory": [
+      {
+        question: "Compare RAM and ROM with one use case for each.",
+        answer: "RAM is volatile working memory used during program execution. ROM is non-volatile and stores firmware that runs at start-up.",
+        paper: "2025 Feb/Mar Paper 13",
+        topic: "Memory",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare"],
+        marks: 4,
+        keywords: ["RAM", "ROM", "volatile", "firmware"]
+      }
+    ],
+    "Storage": [
+      {
+        question: "State one advantage and one disadvantage of SSD compared to HDD.",
+        answer: "Advantage: faster access and no moving parts. Disadvantage: typically higher cost per GB.",
+        paper: "2023 Oct/Nov Paper 22",
+        topic: "Storage",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "state"],
+        marks: 2,
+        keywords: ["SSD", "HDD", "speed", "cost"]
+      }
+    ],
+    "I/O": [
+      {
+        question: "Give one example each of an input device, output device and sensor.",
+        answer: "Input: keyboard; Output: monitor; Sensor: temperature sensor.",
+        paper: "2024 May/June Paper 21",
+        topic: "I/O",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state"],
+        marks: 3,
+        keywords: ["input", "output", "sensor", "devices"]
+      }
+    ],
+    "Systems": [
+      {
+        question: "Define embedded system and give an example.",
+        answer: "An embedded system is dedicated to a specific function within a larger system, e.g., a washing machine controller.",
+        paper: "2025 Oct/Nov Paper 12",
+        topic: "Systems",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["define", "example"],
+        marks: 2,
+        keywords: ["embedded system", "controller"]
+      }
+    ]
+  },
+  "cs-4": {
+    "OS": [
+      {
+        question: "State two functions of an operating system.",
+        answer: "Examples: memory management, file management, process scheduling, device control, security.",
+        paper: "2023 May/June Paper 13",
+        topic: "OS",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state"],
+        marks: 2,
+        keywords: ["operating system", "functions", "memory", "files", "scheduling"]
+      }
+    ],
+    "Languages": [
+      {
+        question: "Compare compiler and interpreter.",
+        answer: "A compiler translates the whole program into object code before execution; an interpreter translates and executes line by line at runtime.",
+        paper: "2024 Oct/Nov Paper 12",
+        topic: "Languages",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare"],
+        marks: 4,
+        keywords: ["compiler", "interpreter", "object code", "runtime"]
+      }
+    ],
+    "Software": [
+      {
+        question: "Explain the difference between system software and application software.",
+        answer: "System software manages and supports computer operations; application software performs user-facing tasks.",
+        paper: "2025 May/June Paper 12",
+        topic: "Software",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["system software", "application software"]
+      }
+    ]
+  },
+  "cs-5": {
+    "Web": [
+      {
+        question: "Describe the role of DNS in accessing websites.",
+        answer: "DNS translates human-readable domain names into IP addresses to locate servers on the internet.",
+        paper: "2023 Oct/Nov Paper 22",
+        topic: "Web",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 2,
+        keywords: ["DNS", "IP address", "domain"]
+      },
+      {
+        question: "Explain the difference between HTTP and HTTPS.",
+        answer: "HTTPS uses TLS/SSL to encrypt communication and verify server identity; HTTP does not provide encryption.",
+        paper: "2024 May/June Paper 21",
+        topic: "Web",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "explain"],
+        marks: 3,
+        keywords: ["HTTP", "HTTPS", "TLS", "SSL", "encryption"]
+      }
+    ],
+    "Security": [
+      {
+        question: "State two methods to protect users from phishing.",
+        answer: "Examples: educate users to check URLs and certificates, use spam filters, enable two-factor authentication.",
+        paper: "2025 Feb/Mar Paper 13",
+        topic: "Security",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state"],
+        marks: 2,
+        keywords: ["phishing", "awareness", "filters", "2FA"]
+      }
+    ],
+    "Communication": [
+      {
+        question: "Identify a suitable protocol for sending emails and one for retrieving emails.",
+        answer: "SMTP is used to send emails; POP3 or IMAP is used to retrieve/manage emails.",
+        paper: "2023 May/June Paper 11",
+        topic: "Communication",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify", "state"],
+        marks: 2,
+        keywords: ["SMTP", "POP3", "IMAP", "email"]
+      }
+    ]
+  },
+  "apl-7": {
+    "Algorithms": [
+      {
+        question: "Trace this pseudocode and state the final value of total given input n=5.",
+        answer: "For i from 1 to 5, total accumulates 15. Final value: 15.",
+        paper: "2024 Oct/Nov Paper 12",
+        topic: "Algorithms",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["trace", "calculate"],
+        marks: 3,
+        keywords: ["pseudocode", "loop", "trace", "accumulate"]
+      },
+      {
+        question: "Explain the difference between selection and iteration using pseudocode examples.",
+        answer: "Selection uses if/else to choose a path; iteration uses loops to repeat steps. Example: IF X>0 THEN...; FOR i=1 TO n ...",
+        paper: "2025 May/June Paper 12",
+        topic: "Algorithms",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain", "compare"],
+        marks: 4,
+        keywords: ["selection", "iteration", "pseudocode", "if", "loop"]
+      }
+    ]
   }
 };
