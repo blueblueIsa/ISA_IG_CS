@@ -1,45 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IGCSE Computer Science Key Terms 2026–2028</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="app">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">IGCSE CS 2026–2028</div>
-      <nav id="units-nav"></nav>
-    </aside>
-    <main class="content">
-      <header class="content-header">
-        <button id="sidebar-toggle" class="sidebar-toggle">Units</button>
-        <div class="header-main">
-          <h1 id="unit-title"></h1>
-          <p id="unit-desc" class="muted"></p>
-        </div>
-        <div class="filters">
-          <input id="search-input" type="search" placeholder="Search key terms…" aria-label="Search key terms">
-          <select id="scope-select" aria-label="Scope">
-            <option value="current">Current Unit</option>
-            <option value="all">All Units</option>
-          </select>
-          <select id="topic-select" aria-label="Topic filter">
-            <option value="">All Topics</option>
-          </select>
-          <label class="confusions-toggle">
-            <input id="confusions-only" type="checkbox" aria-label="Confusions only">
-            Confusions only
-          </label>
-        </div>
-        <div id="letter-filter" class="letters" aria-label="Filter by first letter"></div>
-      </header>
-      <section class="terms" id="terms"></section>
-    </main>
-  </div>
-  <script src="script.js"></script>
-</body>
-<script>
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ISA IGCSE CS Notes</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

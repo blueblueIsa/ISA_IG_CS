@@ -1,4 +1,6 @@
-const units = [
+import type { Unit } from '../types';
+
+export const units: Unit[] = [
   {
     id: "cs-1",
     number: 1,
@@ -40,6 +42,8 @@ const units = [
     terms: [
       { term: "Serial transmission", topic: "Modes", definition: "Bits sent one after another over a single channel." },
       { term: "Parallel transmission", topic: "Modes", definition: "Multiple bits sent simultaneously across several channels." },
+      { term: "Synchronous", topic: "Modes", definition: "Transmission driven by shared clock signal." },
+      { term: "Asynchronous", topic: "Modes", definition: "Transmission with start/stop bits and no shared clock." },
       { term: "Simplex", topic: "Modes", definition: "Communication in one direction only." },
       { term: "Half-duplex", topic: "Modes", definition: "Communication both ways but not at the same time." },
       { term: "Full-duplex", topic: "Modes", definition: "Communication both ways simultaneously." },
@@ -55,6 +59,7 @@ const units = [
       { term: "Even parity", topic: "Errors", definition: "Parity method ensuring an even number of 1s." },
       { term: "Odd parity", topic: "Errors", definition: "Parity method ensuring an odd number of 1s." },
       { term: "ARQ", topic: "Errors", definition: "Automatic repeat request protocol for retransmission." },
+      { term: "ACK/NACK", topic: "Errors", definition: "Positive/negative acknowledgements to confirm receipt." },
       { term: "Handshaking", topic: "Protocols", definition: "Negotiation to establish communication settings." },
       { term: "Protocol", topic: "Protocols", definition: "Agreed rules for data communication." },
       { term: "Packet switching", topic: "Switching", definition: "Data split into packets routed independently." },
@@ -113,6 +118,8 @@ const units = [
       { term: "User interface", topic: "OS", definition: "Means by which users interact with a computer." },
       { term: "CLI", topic: "OS", definition: "Command-line interface using typed commands." },
       { term: "GUI", topic: "OS", definition: "Graphical user interface using windows, icons and menus." },
+      { term: "Multitasking", topic: "OS", definition: "Running multiple tasks apparently simultaneously." },
+      { term: "Scheduling", topic: "OS", definition: "Deciding which process runs and for how long." },
       { term: "Memory management", topic: "OS", definition: "Allocation and control of primary memory." },
       { term: "File management", topic: "OS", definition: "Creation, storage and access of files and directories." },
       { term: "Process management", topic: "OS", definition: "Scheduling and control of running tasks." },
@@ -245,7 +252,7 @@ const units = [
       { term: "Variable", topic: "Basics", definition: "Named storage location holding a value." },
       { term: "Constant", topic: "Basics", definition: "Value that does not change during execution." },
       { term: "Integer", topic: "Types", definition: "Whole number data type." },
-      { term: "Real", topic: "Types", definition: "Floating-point numeric data type." },
+      { term: "Real", topic: "Types", definition: "Numeric data type representing real numbers (IG scope: used without floating-point internals)." },
       { term: "Boolean", topic: "Types", definition: "Logical true/false data type." },
       { term: "Character", topic: "Types", definition: "Single symbol data type." },
       { term: "String", topic: "Types", definition: "Sequence of characters." },
@@ -262,6 +269,7 @@ const units = [
       { term: "WHILE loop", topic: "Control", definition: "Indefinite iteration while condition is true." },
       { term: "REPEAT…UNTIL", topic: "Control", definition: "Loop executing until condition becomes true." },
       { term: "Array", topic: "Structures", definition: "Indexed collection of elements of the same type." },
+      { term: "2D Array", topic: "Structures", definition: "Array of arrays accessed by row and column." },
       { term: "String operations", topic: "Structures", definition: "Concatenation, substring, length and indexing." },
       { term: "Subroutine", topic: "Procedures", definition: "Named block of code performing a task." },
       { term: "Procedure", topic: "Procedures", definition: "Subroutine that does not return a value." },
@@ -330,318 +338,3 @@ const units = [
     ]
   }
 ];
-
-function groupUnits() {
-  const groups = {};
-  units.forEach(u => {
-    if (!groups[u.group]) groups[u.group] = [];
-    groups[u.group].push(u);
-  });
-  return groups;
-}
-
-function renderSidebar(activeId) {
-  const nav = document.getElementById("units-nav");
-  nav.innerHTML = "";
-  const groups = groupUnits();
-  Object.keys(groups).forEach(cat => {
-    const g = document.createElement("div");
-    g.className = "group";
-    const title = document.createElement("div");
-    title.className = "group-title";
-    title.textContent = cat;
-    g.appendChild(title);
-    groups[cat].forEach(u => {
-      const a = document.createElement("a");
-      a.href = `#${u.id}`;
-      a.className = "unit-item" + (u.id === activeId ? " active" : "");
-      const num = document.createElement("div");
-      num.className = "unit-number";
-      num.textContent = u.number;
-      const label = document.createElement("div");
-      label.textContent = u.title;
-      a.appendChild(num);
-      a.appendChild(label);
-      g.appendChild(a);
-    });
-    nav.appendChild(g);
-  });
-}
-
-let state = {
-  activeUnitId: null,
-  scope: "current",
-  search: "",
-  topic: "",
-  letter: "",
-  confusionsOnly: false
-};
-
-function getActiveUnit() {
-  return units.find(u => u.id === state.activeUnitId) || units[0];
-}
-
-function buildLetterFilter() {
-  const el = document.getElementById("letter-filter");
-  el.innerHTML = "";
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const allChip = document.createElement("button");
-  allChip.className = "letter-chip" + (state.letter === "" ? " active" : "");
-  allChip.textContent = "All";
-  allChip.addEventListener("click", () => {
-    state.letter = "";
-    renderTerms();
-  });
-  el.appendChild(allChip);
-  letters.forEach(L => {
-    const chip = document.createElement("button");
-    chip.className = "letter-chip" + (state.letter === L ? " active" : "");
-    chip.textContent = L;
-    chip.addEventListener("click", () => {
-      state.letter = L;
-      renderTerms();
-    });
-    el.appendChild(chip);
-  });
-}
-
-function getScopeUnits() {
-  return state.scope === "all" ? units : [getActiveUnit()];
-}
-
-function collectTopics() {
-  const set = new Set();
-  getScopeUnits().forEach(u => u.terms.forEach(t => set.add(t.topic)));
-  return Array.from(set).sort();
-}
-
-function populateTopicSelect() {
-  const sel = document.getElementById("topic-select");
-  const current = state.topic;
-  sel.innerHTML = "";
-  const optAll = document.createElement("option");
-  optAll.value = "";
-  optAll.textContent = "All Topics";
-  sel.appendChild(optAll);
-  collectTopics().forEach(topic => {
-    const opt = document.createElement("option");
-    opt.value = topic;
-    opt.textContent = topic;
-    sel.appendChild(opt);
-  });
-  sel.value = current;
-}
-
-function computeFilteredTerms() {
-  const q = state.search.trim().toLowerCase();
-  const letter = state.letter;
-  const topic = state.topic;
-  const list = [];
-  getScopeUnits().forEach(u => {
-    u.terms.forEach(t => {
-      const matchesQuery = q === "" || t.term.toLowerCase().includes(q) || t.definition.toLowerCase().includes(q) || t.topic.toLowerCase().includes(q);
-      const matchesLetter = letter === "" || t.term[0].toUpperCase() === letter;
-      const matchesTopic = topic === "" || t.topic === topic;
-      const matchesConfusions = !state.confusionsOnly || (!!t.misconception || !!t.contrast);
-      if (matchesQuery && matchesLetter && matchesTopic) {
-        if (matchesConfusions) list.push({ unit: u, term: t });
-      }
-    });
-  });
-  return list;
-}
-
-function clearTerms() {
-  const termsEl = document.getElementById("terms");
-  termsEl.innerHTML = "";
-}
-
-function renderHeader() {
-  const unit = getActiveUnit();
-  const titleEl = document.getElementById("unit-title");
-  const descEl = document.getElementById("unit-desc");
-  if (state.scope === "all") {
-    titleEl.textContent = "All Units · Key Terms";
-    descEl.textContent = "Filtered across all units and topics.";
-  } else {
-    titleEl.textContent = `Unit ${unit.number} · ${unit.title}`;
-    descEl.textContent = unit.description;
-  }
-}
-
-function renderTermsLazy(items) {
-  const container = document.getElementById("terms");
-  const batchSize = 36;
-  let cursor = 0;
-  container.innerHTML = "";
-  const sentinel = document.createElement("div");
-  sentinel.style.height = "1px";
-  container.appendChild(sentinel);
-  function renderBatch() {
-    const end = Math.min(cursor + batchSize, items.length);
-    for (let i = cursor; i < end; i++) {
-      const { unit, term } = items[i];
-      const card = document.createElement("div");
-      card.className = "term-card";
-      const h = document.createElement("h3");
-      h.className = "term-title";
-      h.textContent = term.term;
-      const p = document.createElement("p");
-      p.className = "term-def";
-      p.textContent = term.definition;
-      card.appendChild(h);
-      card.appendChild(p);
-      if (state.scope === "all") {
-        const meta = document.createElement("p");
-        meta.className = "muted";
-        const topicChip = document.createElement("button");
-        topicChip.className = "chip";
-        topicChip.textContent = term.topic;
-        topicChip.setAttribute("data-topic", term.topic);
-        meta.textContent = `Unit ${unit.number} · ${unit.title} · `;
-        meta.appendChild(topicChip);
-        card.appendChild(meta);
-      } else {
-        const meta = document.createElement("p");
-        meta.className = "muted";
-        const topicChip = document.createElement("button");
-        topicChip.className = "chip";
-        topicChip.textContent = term.topic;
-        topicChip.setAttribute("data-topic", term.topic);
-        meta.appendChild(topicChip);
-        card.appendChild(meta);
-      }
-      const addDetail = (label, value) => {
-        if (!value) return;
-        const d = document.createElement("p");
-        d.className = "detail";
-        const l = document.createElement("span");
-        l.className = "detail-label";
-        l.textContent = label + ": ";
-        d.appendChild(l);
-        if (label === "Contrast" && typeof value === "string" && value.includes("vs")) {
-          const parts = value.split("vs").map(s => s.trim());
-          parts.forEach(part => {
-            const chip = document.createElement("button");
-            chip.className = "chip";
-            chip.textContent = part;
-            chip.setAttribute("data-search", part);
-            d.appendChild(chip);
-          });
-        } else {
-          const t = document.createElement("span");
-          t.textContent = value;
-          d.appendChild(t);
-        }
-        card.appendChild(d);
-      };
-      addDetail("Example", term.example);
-      addDetail("Misconception", term.misconception);
-      addDetail("Contrast", term.contrast);
-      container.insertBefore(card, sentinel);
-    }
-    cursor = end;
-  }
-  renderBatch();
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (cursor < items.length) {
-          // Use idle callback when available for smoother loading
-          const run = () => renderBatch();
-          if ("requestIdleCallback" in window) {
-            requestIdleCallback(run, { timeout: 200 });
-          } else {
-            setTimeout(run, 0);
-          }
-        } else {
-          io.disconnect();
-          sentinel.remove();
-        }
-      }
-    });
-  });
-  io.observe(sentinel);
-}
-
-function renderTerms() {
-  renderHeader();
-  populateTopicSelect();
-  const items = computeFilteredTerms();
-  renderTermsLazy(items);
-}
-
-function handleHashChange() {
-  const id = location.hash.replace("#", "") || units[0].id;
-  state.activeUnitId = id;
-  renderSidebar(id);
-  renderTerms();
-}
-
-function setupToggle() {
-  const btn = document.getElementById("sidebar-toggle");
-  const sidebar = document.getElementById("sidebar");
-  btn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-  });
-  window.addEventListener("hashchange", () => {
-    sidebar.classList.remove("open");
-  });
-}
-
-function setupFilters() {
-  const searchInput = document.getElementById("search-input");
-  const scopeSelect = document.getElementById("scope-select");
-  const topicSelect = document.getElementById("topic-select");
-  const confusionsOnly = document.getElementById("confusions-only");
-  searchInput.addEventListener("input", e => {
-    state.search = e.target.value;
-    renderTerms();
-  });
-  scopeSelect.addEventListener("change", e => {
-    state.scope = e.target.value;
-    buildLetterFilter();
-    renderTerms();
-  });
-  topicSelect.addEventListener("change", e => {
-    state.topic = e.target.value;
-    renderTerms();
-  });
-  confusionsOnly.addEventListener("change", e => {
-    state.confusionsOnly = e.target.checked;
-    renderTerms();
-  });
-  buildLetterFilter();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  handleHashChange();
-  setupToggle();
-  setupFilters();
-});
-
-document.getElementById("units-nav").addEventListener("click", (e) => {
-  const a = e.target.closest("a.unit-item");
-  if (!a) return;
-  e.preventDefault();
-  const id = a.getAttribute("href").replace("#", "");
-  if (id !== state.activeUnitId) {
-    location.hash = "#" + id;
-    handleHashChange();
-  }
-});
-
-document.getElementById("terms").addEventListener("click", (e) => {
-  const topicChip = e.target.closest("[data-topic]");
-  const searchChip = e.target.closest("[data-search]");
-  if (topicChip) {
-    state.topic = topicChip.getAttribute("data-topic");
-    document.getElementById("topic-select").value = state.topic;
-    renderTerms();
-  } else if (searchChip) {
-    const value = searchChip.getAttribute("data-search");
-    state.search = value;
-    document.getElementById("search-input").value = value;
-    renderTerms();
-  }
-});

@@ -52,6 +52,25 @@ nav .group {
   margin-bottom: 20px;
 }
 
+.topic-item {
+  display: block;
+  padding: 8px 10px;
+  margin: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #334155;
+  background: #f8fafc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.topic-item.active {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #1e40af;
+}
+
 .group-title {
   font-size: 12px;
   font-weight: 600;
@@ -209,6 +228,107 @@ nav .group {
   gap: 16px;
 }
 
+.flashcards.hidden {
+  display: none;
+}
+
+.qa.hidden {
+  display: none;
+}
+
+.qa {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.qa-card {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.qa-question {
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-size: 15px;
+}
+
+.qa-meta {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 8px 0;
+}
+
+.qa-answer {
+  color: var(--text);
+  font-size: 14px;
+  margin: 0;
+  display: none;
+}
+
+.qa-answer.show {
+  display: block;
+}
+
+.qa-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.qa-actions button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+.flashcards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flashcard {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 160px;
+}
+
+.flash-front {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.flash-back {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  display: none;
+}
+
+.flash-back.show {
+  display: block;
+}
+
+.flash-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.flash-controls button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
 .term-card {
   border: 1px solid var(--border);
   background: var(--bg);
@@ -242,6 +362,9 @@ nav .group {
 @media (max-width: 1200px) {
   .terms {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .qa {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 
