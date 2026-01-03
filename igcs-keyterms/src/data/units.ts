@@ -42,14 +42,9 @@ export const units: Unit[] = [
     terms: [
       { term: "Serial transmission", topic: "Modes", definition: "Bits sent one after another over a single channel." },
       { term: "Parallel transmission", topic: "Modes", definition: "Multiple bits sent simultaneously across several channels." },
-      { term: "Synchronous", topic: "Modes", definition: "Transmission driven by shared clock signal." },
-      { term: "Asynchronous", topic: "Modes", definition: "Transmission with start/stop bits and no shared clock." },
       { term: "Simplex", topic: "Modes", definition: "Communication in one direction only." },
       { term: "Half-duplex", topic: "Modes", definition: "Communication both ways but not at the same time." },
       { term: "Full-duplex", topic: "Modes", definition: "Communication both ways simultaneously." },
-      { term: "Bandwidth", topic: "Performance", definition: "Maximum data transfer rate of a network path." },
-      { term: "Latency", topic: "Performance", definition: "Time delay between sending and receiving data." },
-      { term: "Throughput", topic: "Performance", definition: "Actual rate of successful data transfer." },
       { term: "Packet", topic: "Packets", definition: "Unit of data sent across a network with header and payload." },
       { term: "Header", topic: "Packets", definition: "Control information at the start of a packet." },
       { term: "Payload", topic: "Packets", definition: "User data carried in a packet." },
@@ -60,12 +55,9 @@ export const units: Unit[] = [
       { term: "Odd parity", topic: "Errors", definition: "Parity method ensuring an odd number of 1s." },
       { term: "ARQ", topic: "Errors", definition: "Automatic repeat request protocol for retransmission." },
       { term: "ACK/NACK", topic: "Errors", definition: "Positive/negative acknowledgements to confirm receipt." },
-      { term: "Handshaking", topic: "Protocols", definition: "Negotiation to establish communication settings." },
       { term: "Protocol", topic: "Protocols", definition: "Agreed rules for data communication." },
       { term: "Packet switching", topic: "Switching", definition: "Data split into packets routed independently." },
-      { term: "Circuit switching", topic: "Switching", definition: "Dedicated path established for the duration of communication." },
-      { term: "Buffering", topic: "Control", definition: "Storing data temporarily to manage differences in speed." },
-      { term: "Flow control", topic: "Control", definition: "Techniques to prevent sender overwhelming receiver." }
+      { term: "Buffering", topic: "Control", definition: "Storing data temporarily to manage differences in speed." }
     ]
   },
   {

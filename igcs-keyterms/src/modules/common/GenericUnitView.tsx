@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import type { Unit, ViewMode } from '../../types';
+import type { Unit, ViewMode, Term } from '../../types';
 import { TermCard } from '../../components/shared/TermCard';
 import { Flashcard } from '../../components/shared/Flashcard';
+import { qaData } from '../../data/qa';
 import { Shuffle, BookOpen, Layers } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,6 +40,20 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
   }, [unit, search, topic, letter, confusionsOnly]);
 
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  const hasRelatedQA = (term: Term) => {
+    const unitQA = qaData[unit.id];
+    if (!unitQA) return false;
+    
+    const questions = unitQA[term.topic] || [];
+    const k = term.term.toLowerCase();
+    
+    return questions.some(q => {
+      const inText = q.question.toLowerCase().includes(k) || q.answer.toLowerCase().includes(k);
+      const inKeywords = Array.isArray(q.keywords) && q.keywords.some(w => w.toLowerCase().includes(k));
+      return inText || inKeywords;
+    });
+  };
 
   return (
     <div>
@@ -106,13 +121,13 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
             <TermCard 
               key={i} 
               term={term} 
-              onViewQA={(keyword) => {
+              onViewQA={hasRelatedQA(term) ? (keyword) => {
                 const params = new URLSearchParams();
                 params.set('unit', unit.id);
                 params.set('topic', term.topic);
                 params.set('q', keyword);
                 navigate(`/qa?${params.toString()}`);
-              }}
+              } : undefined}
             />
           ))}
           {filteredTerms.length === 0 && (

@@ -148,18 +148,134 @@ export const qaData: QAData = {
   "cs-2": {
     "Modes": [
       {
-        question: "Differentiate synchronous and asynchronous transmission.",
-        answer: "Synchronous uses a shared clock to align bits, efficient for continuous streams. Asynchronous adds start/stop bits and does not rely on shared clock, suitable for intermittent transmission.",
-        paper: "2023 May/June Paper 13",
+        question: "Serial data transmission is used to transmit the data packets across the network.\nExplain why serial data transmission is used to transmit the data packets.",
+        answer: "Any three from:\nThe network may be spread over a long distance ...\n... so it is more reliable\nBits will be sent/arrive in sequence\n...so bits less likely to be skewed\nLess crosstalk/interference\n... so less likely to have errors\nThe data may not need to be transmitted at a fast speed // data transmission speed of serial is adequate\nThe cables in the network only use serial transmission",
+        paper: "2024 May/June Paper 11",
         topic: "Modes",
         source: "PastPapers.Co",
         link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
-        tags: ["compare"],
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["serial", "parallel", "transmission", "reliability", "skew", "interference"]
+      },
+      {
+        question: "Tick (✓) one box to show which of the terms is not a method for transmitting data.\nA serial\nB simplex\nC parallel\nD parity",
+        answer: "D parity",
+        paper: "2024 May/June Paper 12",
+        topic: "Modes",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify"],
+        marks: 1,
+        keywords: ["transmission method", "parity", "serial", "simplex", "parallel"]
+      },
+      {
+        question: "Explain the difference between simplex, half-duplex and full-duplex data transmission.",
+        answer: "Simplex: Data flows in one direction only (e.g., keyboard to CPU).\nHalf-duplex: Data flows in both directions but not at the same time (e.g., walkie-talkie).\nFull-duplex: Data flows in both directions simultaneously (e.g., telephone call).",
+        paper: "2023 May/June Paper 11",
+        topic: "Modes",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "explain"],
+        marks: 6,
+        keywords: ["simplex", "half-duplex", "full-duplex", "direction"]
+      },
+      {
+        question: "Describe how a USB connection works when a device is plugged in.",
+        answer: "Any three from:\nThe computer detects the device automatically\n... due to a change in voltage on the data lines\nThe device is automatically recognised\n... and the appropriate driver software is loaded\nIf no driver is found, the user is prompted to install one",
+        paper: "2024 Oct/Nov Paper 12",
+        topic: "Modes",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 3,
+        keywords: ["USB", "driver", "plug and play", "detection"]
+      }
+    ],
+    "Packets": [
+      {
+        question: "Describe the structure of a data packet.",
+        answer: "Any three from:\nA packet is split into three different sections\n... the header\n... the payload\n... the trailer",
+        paper: "2024 May/June Paper 11",
+        topic: "Packets",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 3,
+        keywords: ["packet", "structure", "header", "payload", "trailer"]
+      },
+      {
+        question: "Data is broken down into smaller units to be transmitted from one device to another.\nGive the name of the unit that data is broken down into.",
+        answer: "Packet",
+        paper: "2024 May/June Paper 12",
+        topic: "Packets",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify"],
+        marks: 1,
+        keywords: ["packet", "data unit"]
+      }
+    ],
+    "Switching": [
+      {
+        question: "Packet switching is used to transmit the data packets across the network.\nIdentify the device that controls which path is taken by each data packet.",
+        answer: "Router",
+        paper: "2024 May/June Paper 11",
+        topic: "Switching",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify"],
+        marks: 1,
+        keywords: ["router", "packet switching", "path"]
+      }
+    ],
+    "Encryption": [
+      {
+        question: "Explain the difference between symmetric and asymmetric encryption.",
+        answer: "Symmetric encryption uses the same key for both encryption and decryption. Asymmetric encryption uses a public key for encryption and a private key for decryption (or vice versa).",
+        paper: "2023 May/June Paper 12",
+        topic: "Encryption",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "explain"],
         marks: 4,
-        keywords: ["synchronous", "asynchronous", "start/stop bits", "clock"]
+        keywords: ["symmetric", "asymmetric", "encryption", "public key", "private key"]
+      },
+      {
+        question: "State one benefit of using symmetric encryption over asymmetric encryption.",
+        answer: "Symmetric encryption is faster/more efficient to calculate than asymmetric encryption.",
+        paper: "2024 Oct/Nov Paper 11",
+        topic: "Encryption",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state"],
+        marks: 1,
+        keywords: ["symmetric", "speed", "efficiency"]
       }
     ],
     "Errors": [
+      {
+        question: "Describe how an Automatic Repeat Request (ARQ) system is used to check for errors.",
+        answer: "Any four from:\nThe sender transmits a data packet\n... and waits for an acknowledgement (ACK)\nIf no ACK is received within a timeout period\n... or if a negative acknowledgement (NACK) is received\nThe sender retransmits the packet\nThis process repeats until an ACK is received or a limit is reached",
+        paper: "2024 May/June Paper 11",
+        topic: "Errors",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 4,
+        keywords: ["ARQ", "ACK", "NACK", "timeout", "retransmit", "packet"]
+      },
+      {
+        question: "Explain how a check digit is used to check for data entry errors.",
+        answer: "A calculation is performed on the data to generate a digit.\nThis digit is appended to the data.\nWhen data is entered, the calculation is performed again.\nIf the calculated digit matches the entered check digit, the data is likely correct.",
+        paper: "2023 Oct/Nov Paper 12",
+        topic: "Errors",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["check digit", "calculation", "validation"]
+      },
       {
         question: "Describe parity bits and a limitation of parity checking.",
         answer: "Parity adds a bit to make the number of 1s even or odd. Limitation: it detects single-bit errors but not all multi-bit errors (e.g., two-bit flips retain parity).",
@@ -181,30 +297,6 @@ export const qaData: QAData = {
         tags: ["explain"],
         marks: 3,
         keywords: ["checksum", "error detection"]
-      }
-    ],
-    "Protocols": [
-      {
-        question: "Explain handshaking and why it is used in network communication.",
-        answer: "Handshaking is the negotiation process where devices agree on parameters (speed, protocol features) before data transfer, ensuring compatibility and reliable communication.",
-        paper: "2025 May/June Paper 12",
-        topic: "Protocols",
-        source: "PastPapers.Co",
-        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
-        tags: ["explain"],
-        marks: 3,
-        keywords: ["handshaking", "protocols", "negotiation"]
-      },
-      {
-        question: "Compare packet switching and circuit switching.",
-        answer: "Packet switching splits data into packets routed independently; circuit switching establishes a dedicated path for the entire session. Packet switching is efficient for variable traffic, circuit switching offers consistent latency.",
-        paper: "2024 May/June Paper 21",
-        topic: "Protocols",
-        source: "PastPapers.Co",
-        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
-        tags: ["compare"],
-        marks: 4,
-        keywords: ["packet switching", "circuit switching"]
       }
     ]
   },
@@ -231,6 +323,39 @@ export const qaData: QAData = {
         tags: ["explain"],
         marks: 3,
         keywords: ["ALU", "control unit", "CPU", "fetch-decode-execute"]
+      },
+      {
+        question: "Describe the stored program concept.",
+        answer: "Instructions and data are stored in the same memory unit\n... and are accessed via the same buses.",
+        paper: "2023 May/June Paper 12",
+        topic: "Architecture",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 2,
+        keywords: ["stored program", "memory", "instructions", "data"]
+      },
+      {
+        question: "Describe the steps of the Fetch-Execute cycle.",
+        answer: "Any four from:\nThe PC holds the address of the next instruction\nThe address is copied to the MAR\nThe address is sent along the address bus\nThe instruction is fetched from that address in memory\n... and transferred to the MDR\nThe instruction is sent to the CIR\nThe PC is incremented\nThe instruction is decoded and executed",
+        paper: "2024 May/June Paper 11",
+        topic: "Architecture",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 4,
+        keywords: ["fetch-execute", "PC", "MAR", "MDR", "CIR"]
+      },
+      {
+        question: "Explain how clock speed and cache size affect CPU performance.",
+        answer: "Clock speed: Higher speed means more cycles per second, so more instructions can be processed.\nCache size: Larger cache stores more frequently used instructions/data closer to the CPU, reducing access time compared to RAM.",
+        paper: "2025 Feb/Mar Paper 12",
+        topic: "Architecture",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 4,
+        keywords: ["clock speed", "cache", "performance", "CPU"]
       }
     ],
     "Memory": [
@@ -244,6 +369,17 @@ export const qaData: QAData = {
         tags: ["compare"],
         marks: 4,
         keywords: ["RAM", "ROM", "volatile", "firmware"]
+      },
+      {
+        question: "Explain the purpose of Virtual Memory.",
+        answer: "Any three from:\nIt is used when RAM is full\nData not currently in use is moved from RAM to secondary storage (HDD/SSD)\n... creating 'pages'\nIt extends the available memory for running programs\nData is swapped back to RAM when needed",
+        paper: "2024 May/June Paper 12",
+        topic: "Memory",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["virtual memory", "paging", "RAM", "secondary storage"]
       }
     ],
     "Storage": [
@@ -257,6 +393,17 @@ export const qaData: QAData = {
         tags: ["compare", "state"],
         marks: 2,
         keywords: ["SSD", "HDD", "speed", "cost"]
+      },
+      {
+        question: "Describe how data is written to and read from optical storage.",
+        answer: "Any three from:\nA laser beam is used to read/write data\nData is stored as pits and lands\n... on a spiral track\nWhen reading, the laser is reflected differently by pits and lands\n... which is interpreted as binary 1s and 0s",
+        paper: "2023 May/June Paper 13",
+        topic: "Storage",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 3,
+        keywords: ["optical", "laser", "pits", "lands", "binary"]
       }
     ],
     "I/O": [
@@ -270,6 +417,28 @@ export const qaData: QAData = {
         tags: ["state"],
         marks: 3,
         keywords: ["input", "output", "sensor", "devices"]
+      },
+      {
+        question: "A greenhouse system controls temperature automatically. Describe how the system uses sensors and actuators to maintain temperature.",
+        answer: "Any four from:\nThe temperature sensor constantly measures the temperature\nIt sends analogue data to the ADC\n... which converts it to digital data for the microprocessor\nThe microprocessor compares the reading to a pre-set value\nIf temperature < pre-set value, it signals the actuator\n... to turn on the heater\nIf temperature > pre-set value, it signals the actuator to turn off the heater/open windows",
+        paper: "2024 Oct/Nov Paper 12",
+        topic: "I/O",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe", "application"],
+        marks: 4,
+        keywords: ["sensor", "microprocessor", "actuator", "ADC", "control loop"]
+      },
+      {
+        question: "Explain how a 3D printer creates a solid object.",
+        answer: "Any three from:\nThe object is designed in CAD software\nThe design is sliced into layers\nThe printer builds the object layer by layer\n... using a material (e.g., plastic filament) that is heated and extruded through a nozzle\nEach layer hardens/cools before the next is added",
+        paper: "2023 May/June Paper 11",
+        topic: "I/O",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 3,
+        keywords: ["3D printer", "layers", "CAD", "additive manufacturing"]
       }
     ],
     "Systems": [
@@ -298,6 +467,28 @@ export const qaData: QAData = {
         tags: ["state"],
         marks: 2,
         keywords: ["operating system", "functions", "memory", "files", "scheduling"]
+      },
+      {
+        question: "Describe how an interrupt is handled by the CPU.",
+        answer: "Any four from:\nThe CPU completes the current fetch-execute cycle\nThe contents of the registers (PC/ACC) are saved\n... to the stack\nThe source of the interrupt is identified\nThe appropriate Interrupt Service Routine (ISR) is called/executed\nOnce the ISR is complete, the saved register values are restored\n... from the stack\nThe CPU continues with the next instruction of the original program",
+        paper: "2024 May/June Paper 11",
+        topic: "OS",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 4,
+        keywords: ["interrupt", "CPU", "ISR", "stack", "registers"]
+      },
+      {
+        question: "Explain the purpose of an interrupt signal.",
+        answer: "It is a signal sent to the processor/CPU to request attention\nIt causes the processor to stop its current task to service a higher priority task",
+        paper: "2023 Oct/Nov Paper 12",
+        topic: "OS",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 2,
+        keywords: ["interrupt", "signal", "CPU", "attention"]
       }
     ],
     "Languages": [
@@ -311,6 +502,28 @@ export const qaData: QAData = {
         tags: ["compare"],
         marks: 4,
         keywords: ["compiler", "interpreter", "object code", "runtime"]
+      },
+      {
+        question: "State two advantages of using a High-Level Language (HLL) compared to a Low-Level Language (LLL).",
+        answer: "Any two from:\nEasier to understand/read/write (for humans)\n... as it uses English-like statements\nEasier to debug/find errors\nPortable/machine independent\n... code can run on different hardware without rewrite",
+        paper: "2024 May/June Paper 12",
+        topic: "Languages",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["state", "compare"],
+        marks: 2,
+        keywords: ["high-level language", "low-level language", "portable", "debug"]
+      },
+      {
+        question: "Explain why a programmer might choose to write code in Assembly Language.",
+        answer: "Any two from:\nTo have direct control over the hardware\nTo write code that occupies less memory\nTo write code that executes faster/more efficiently\nNo need for a compiler/interpreter (only assembler needed)\nSpecific hardware drivers often require low-level access",
+        paper: "2023 May/June Paper 11",
+        topic: "Languages",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 2,
+        keywords: ["assembly", "hardware control", "efficiency", "memory"]
       }
     ],
     "Software": [
@@ -350,6 +563,17 @@ export const qaData: QAData = {
         tags: ["compare", "explain"],
         marks: 3,
         keywords: ["HTTP", "HTTPS", "TLS", "SSL", "encryption"]
+      },
+      {
+        question: "Explain the purpose of a cookie.",
+        answer: "Any two from:\nTo store user preferences/settings\n... e.g., language choice, theme\nTo track user browsing habits/analytics\nTo implement shopping carts\n... holding items while user browses\nTo keep a user logged in (session management)",
+        paper: "2024 May/June Paper 12",
+        topic: "Web",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 2,
+        keywords: ["cookie", "preferences", "tracking", "session"]
       }
     ],
     "Security": [
@@ -363,6 +587,39 @@ export const qaData: QAData = {
         tags: ["state"],
         marks: 2,
         keywords: ["phishing", "awareness", "filters", "2FA"]
+      },
+      {
+        question: "Describe the process of SSL/TLS handshaking.",
+        answer: "Any four from:\nThe client sends a request to the server to establish a secure connection\nThe server sends its digital certificate to the client\n... which includes the server's public key\nThe client verifies the digital certificate (authenticity and date)\nThe client generates a session key\n... encrypts it with the server's public key\n... and sends it to the server\nThe server decrypts the session key with its private key\nBoth parties now use the session key for encrypted communication",
+        paper: "2024 May/June Paper 11",
+        topic: "Security",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 4,
+        keywords: ["SSL", "TLS", "handshake", "encryption", "certificate", "public key", "private key"]
+      },
+      {
+        question: "Explain the difference between phishing and pharming.",
+        answer: "Phishing involves sending fraudulent emails to trick users into revealing data. Pharming involves malicious code installed on a user's hard drive or web server redirection to a fake website without the user's knowledge.",
+        paper: "2023 Oct/Nov Paper 22",
+        topic: "Security",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "explain"],
+        marks: 4,
+        keywords: ["phishing", "pharming", "fraud", "redirection"]
+      },
+      {
+        question: "Explain how a digital signature is used to verify the authenticity of a document.",
+        answer: "Any three from:\nA hash/digest of the document is created\n... using a hashing algorithm\nThe hash is encrypted using the sender's private key\n... to create the digital signature\nThe receiver decrypts the signature using the sender's public key\n... to get the original hash\nThe receiver recalculates the hash of the received document\nIf the two hashes match, the document is authentic and unaltered",
+        paper: "2025 May/June Paper 12",
+        topic: "Security",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 4,
+        keywords: ["digital signature", "hash", "private key", "public key", "authenticity"]
       }
     ],
     "Communication": [
@@ -402,6 +659,76 @@ export const qaData: QAData = {
         tags: ["explain", "compare"],
         marks: 4,
         keywords: ["selection", "iteration", "pseudocode", "if", "loop"]
+      },
+      {
+        question: "Compare Linear Search and Binary Search.",
+        answer: "Linear search checks every item in sequence; it works on any list but is slow for large lists. Binary search keeps dividing the list in half; it is much faster but requires the list to be sorted.",
+        paper: "2023 May/June Paper 21",
+        topic: "Algorithms",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare"],
+        marks: 4,
+        keywords: ["linear search", "binary search", "sorted", "efficiency"]
+      },
+      {
+        question: "Describe how a Bubble Sort algorithm sorts a list of numbers into ascending order.",
+        answer: "Any four from:\nThe algorithm loops through the list\nIt compares each pair of adjacent elements\nIf they are in the wrong order, it swaps them\nIt records that a swap has occurred\nIt repeats the loop until a pass is made with no swaps",
+        paper: "2024 May/June Paper 22",
+        topic: "Algorithms",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["describe"],
+        marks: 4,
+        keywords: ["bubble sort", "swap", "pass", "ascending"]
+      }
+    ],
+    "Design": [
+      {
+        question: "Identify the standard flowchart symbol used for an assignment or process.",
+        answer: "Rectangle",
+        paper: "2023 Oct/Nov Paper 22",
+        topic: "Design",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify"],
+        marks: 1,
+        keywords: ["flowchart", "symbol", "process", "rectangle"]
+      },
+      {
+        question: "Explain the difference between a WHILE loop and a REPEAT...UNTIL loop.",
+        answer: "WHILE loop checks the condition at the start (pre-condition) and may not run at all. REPEAT...UNTIL checks the condition at the end (post-condition) and always runs at least once.",
+        paper: "2024 May/June Paper 21",
+        topic: "Design",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["compare", "explain"],
+        marks: 3,
+        keywords: ["loop", "while", "repeat", "condition"]
+      }
+    ],
+    "Testing": [
+      {
+        question: "Explain the purpose of a trace table.",
+        answer: "To manually track the values of variables as the code executes, allowing logic errors to be identified.",
+        paper: "2025 Feb/Mar Paper 22",
+        topic: "Testing",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["explain"],
+        marks: 2,
+        keywords: ["trace table", "variables", "logic error", "testing"]
+      },
+      {
+        question: "Identify three types of test data used to test a system.",
+        answer: "Normal data (valid/typical), Boundary data (extreme ends of valid range), Erroneous/Abnormal data (invalid).",
+        paper: "2023 May/June Paper 21",
+        topic: "Testing",
+        source: "PastPapers.Co",
+        link: "https://pastpapers.co/cie/?dir=IGCSE%2FComputer-Science-0478",
+        tags: ["identify", "state"],
+        marks: 3,
+        keywords: ["test data", "normal", "boundary", "erroneous"]
       }
     ]
   }
