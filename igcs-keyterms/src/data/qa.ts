@@ -5,7 +5,7 @@ export const qaData: QAData = {
     "Numbers": [
       {
         question: "Explain why overflow occurs in 8-bit unsigned binary addition. Give an example.",
-        answer: "In 8-bit unsigned binary, the largest value is 255. If the result exceeds 255, the most significant bit is discarded, causing wrap-around. Example: 11111111₂ (255) + 00000001₂ (1) → 00000000₂ with carry out.",
+        answer: "Any three from:\nIn 8-bit unsigned binary, the largest value is 255\nThe result of the addition exceeds 255\nThe most significant bit (carry bit) is discarded\n... causing wrap-around\nExample: 11111111₂ (255) + 00000001₂ (1) → 00000000₂",
         paper: "2023 May/June Paper 11",
         topic: "Numbers",
         source: "PastPapers.Co",
@@ -16,7 +16,7 @@ export const qaData: QAData = {
       },
       {
         question: "Convert 11010110₂ to denary and hexadecimal.",
-        answer: "Denary: 214. Hexadecimal: D6₁₆.",
+        answer: "Denary: 214\nHexadecimal: D6",
         paper: "2024 Oct/Nov Paper 12",
         topic: "Numbers",
         source: "PastPapers.Co",
@@ -27,7 +27,7 @@ export const qaData: QAData = {
       },
       {
         question: "State two reasons why hexadecimal is used by computer scientists.",
-        answer: "It is more compact than binary and easier for humans to read; it maps neatly to 4-bit nibbles.",
+        answer: "Any two from:\nIt is more compact/shorter than binary\nIt is easier for humans to read/write/debug\nIt is less prone to errors (when copying/entering)\nIt maps neatly to 4-bit nibbles",
         paper: "2025 Feb/Mar Paper 13",
         topic: "Numbers",
         source: "PastPapers.Co",
@@ -40,7 +40,7 @@ export const qaData: QAData = {
     "Text": [
       {
         question: "Describe a difference between ASCII and Unicode and why Unicode is needed.",
-        answer: "ASCII uses 7/8 bits and covers a limited set of characters, mainly Latin. Unicode assigns code points to characters from many languages and symbols, supporting internationalization and emojis.",
+        answer: "Difference:\nASCII uses 7 or 8 bits (per character)\nUnicode uses 16 or 32 bits (per character)\n\nReason:\nASCII has a limited character set (Latin only)\nUnicode covers all major languages/symbols (internationalization)",
         paper: "2024 Oct/Nov Paper 12",
         topic: "Text",
         source: "PastPapers.Co",
@@ -51,7 +51,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain why extended ASCII is insufficient for representing some languages.",
-        answer: "Extended ASCII provides 256 codes which still cannot cover the full range of characters for many languages, whereas Unicode supports thousands of code points.",
+        answer: "Extended ASCII provides 256 codes\n... which is insufficient for languages with many characters (e.g., Chinese/Japanese)\nUnicode supports thousands of code points",
         paper: "2023 Oct/Nov Paper 22",
         topic: "Text",
         source: "PastPapers.Co",
@@ -64,7 +64,7 @@ export const qaData: QAData = {
     "Images": [
       {
         question: "Define colour depth and explain its effect on image file size.",
-        answer: "Colour depth is the number of bits per pixel. Higher colour depth increases the number of representable colours and increases file size because more bits are stored per pixel.",
+        answer: "Colour depth is the number of bits used to represent each pixel\nGreater colour depth allows more colours to be represented\n... which increases the file size\n... as more bits are needed for each pixel",
         paper: "2025 Feb/Mar Paper 13",
         topic: "Images",
         source: "PastPapers.Co",
@@ -75,7 +75,7 @@ export const qaData: QAData = {
       },
       {
         question: "Calculate the file size of a 400×300 image with 16-bit colour depth, uncompressed.",
-        answer: "Pixels: 400×300 = 120,000. Bits: 120,000×16 = 1,920,000 bits. Bytes: 240,000 bytes ≈ 234.4 KB.",
+        answer: "Pixels: 400 × 300 = 120,000\nBits: 120,000 × 16 = 1,920,000 bits\nBytes: 1,920,000 / 8 = 240,000 bytes\n(≈ 234.4 KB)",
         paper: "2024 May/June Paper 21",
         topic: "Images",
         source: "PastPapers.Co",
@@ -88,7 +88,7 @@ export const qaData: QAData = {
     "Sound": [
       {
         question: "State how sample rate and resolution affect sound quality and file size.",
-        answer: "Higher sample rate captures more frequent samples, and higher resolution stores each sample with more precision. Both increase sound fidelity and file size due to more data per second.",
+        answer: "Sample rate: Number of samples taken per second\nHigher sample rate improves sound accuracy/quality\n... but increases file size\n\nResolution: Number of bits per sample\nHigher resolution improves dynamic range/quality\n... but increases file size",
         paper: "2023 Oct/Nov Paper 22",
         topic: "Sound",
         source: "PastPapers.Co",
@@ -99,7 +99,7 @@ export const qaData: QAData = {
       },
       {
         question: "Calculate the file size of a 30-second mono audio clip, 44.1 kHz sample rate, 16-bit resolution, uncompressed.",
-        answer: "Samples: 44,100×30 = 1,323,000. Bits: 1,323,000×16 = 21,168,000 bits. Bytes: 2,646,000 bytes ≈ 2.52 MB.",
+        answer: "Samples: 44,100 × 30 = 1,323,000\nTotal bits: 1,323,000 × 16 = 21,168,000 bits\nBytes: 21,168,000 / 8 = 2,646,000 bytes\n(≈ 2.52 MB)",
         paper: "2025 Oct/Nov Paper 12",
         topic: "Sound",
         source: "PastPapers.Co",
@@ -112,7 +112,7 @@ export const qaData: QAData = {
     "Compression": [
       {
         question: "Compare lossless and lossy compression with a suitable use case for each.",
-        answer: "Lossless preserves all data, suitable for text or source code where exact recovery is essential. Lossy removes some data, suitable for images/audio where small quality loss is acceptable to reduce size.",
+        answer: "Lossless:\nNo data is lost/original file can be recreated perfectly\nUse: Text files/Source code/Spreadsheets\n\nLossy:\nSome data is permanently removed/discarded (to reduce size)\nUse: Images (JPEG)/Audio (MP3)/Video",
         paper: "2024 May/June Paper 21",
         topic: "Compression",
         source: "PastPapers.Co",
@@ -123,7 +123,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain RLE and when it is effective.",
-        answer: "Run-length encoding stores consecutive repeated values as count-value pairs (e.g., AAAA → 4A). It is effective when data has long runs of repeated values, such as simple graphics; not effective for random data.",
+        answer: "Run-length encoding stores consecutive identical values as a count and the value\nExample: AAAAA becomes 5A\nEffective for data with long runs of repeated values (e.g., simple graphics)\nNot effective for random data",
         paper: "2025 Oct/Nov Paper 12",
         topic: "Compression",
         source: "PastPapers.Co",
@@ -134,7 +134,7 @@ export const qaData: QAData = {
       },
       {
         question: "Describe what a dictionary-based compression method does in general terms.",
-        answer: "It builds a dictionary of repeated patterns and replaces occurrences with shorter codes referencing the dictionary entries.",
+        answer: "Builds a dictionary/index of frequent patterns/words\nReplaces instances of patterns with short references/tokens to the dictionary",
         paper: "2023 May/June Paper 13",
         topic: "Compression",
         source: "PastPapers.Co",
@@ -171,7 +171,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain the difference between simplex, half-duplex and full-duplex data transmission.",
-        answer: "Simplex: Data flows in one direction only (e.g., keyboard to CPU).\nHalf-duplex: Data flows in both directions but not at the same time (e.g., walkie-talkie).\nFull-duplex: Data flows in both directions simultaneously (e.g., telephone call).",
+        answer: "Simplex:\nData flows in one direction only\nExample: Keyboard to CPU\n\nHalf-duplex:\nData flows in both directions but not at the same time\nExample: Walkie-talkie\n\nFull-duplex:\nData flows in both directions simultaneously\nExample: Telephone call",
         paper: "2023 May/June Paper 11",
         topic: "Modes",
         source: "PastPapers.Co",
@@ -232,7 +232,7 @@ export const qaData: QAData = {
     "Encryption": [
       {
         question: "Explain the difference between symmetric and asymmetric encryption.",
-        answer: "Symmetric encryption uses the same key for both encryption and decryption. Asymmetric encryption uses a public key for encryption and a private key for decryption (or vice versa).",
+        answer: "Symmetric encryption uses the same key for both encryption and decryption\nAsymmetric encryption uses a public key for encryption\n... and a private key for decryption (or vice versa)",
         paper: "2023 May/June Paper 12",
         topic: "Encryption",
         source: "PastPapers.Co",
@@ -243,7 +243,7 @@ export const qaData: QAData = {
       },
       {
         question: "State one benefit of using symmetric encryption over asymmetric encryption.",
-        answer: "Symmetric encryption is faster/more efficient to calculate than asymmetric encryption.",
+        answer: "Symmetric encryption is faster/more efficient to calculate than asymmetric encryption",
         paper: "2024 Oct/Nov Paper 11",
         topic: "Encryption",
         source: "PastPapers.Co",
@@ -267,7 +267,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain how a check digit is used to check for data entry errors.",
-        answer: "A calculation is performed on the data to generate a digit.\nThis digit is appended to the data.\nWhen data is entered, the calculation is performed again.\nIf the calculated digit matches the entered check digit, the data is likely correct.",
+        answer: "A calculation is performed on the data to generate a digit\nThis digit is appended to the data\nWhen data is entered, the calculation is performed again\nIf the calculated digit matches the entered check digit, the data is likely correct",
         paper: "2023 Oct/Nov Paper 12",
         topic: "Errors",
         source: "PastPapers.Co",
@@ -278,7 +278,7 @@ export const qaData: QAData = {
       },
       {
         question: "Describe parity bits and a limitation of parity checking.",
-        answer: "Parity adds a bit to make the number of 1s even or odd. Limitation: it detects single-bit errors but not all multi-bit errors (e.g., two-bit flips retain parity).",
+        answer: "Parity adds a bit to make the number of 1s even or odd\nLimitation: it detects single-bit errors\n... but not all multi-bit errors (e.g., two-bit flips retain parity)",
         paper: "2024 Oct/Nov Paper 23",
         topic: "Errors",
         source: "PastPapers.Co",
@@ -289,7 +289,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain what a checksum is and how it is used.",
-        answer: "A checksum is a value computed from the data; the sender transmits it with the packet and the receiver recomputes and compares to detect errors.",
+        answer: "A checksum is a value computed from the data\nThe sender transmits it with the packet\nThe receiver recomputes the checksum\n... and compares it to the received checksum to detect errors",
         paper: "2025 May/June Paper 12",
         topic: "Errors",
         source: "PastPapers.Co",

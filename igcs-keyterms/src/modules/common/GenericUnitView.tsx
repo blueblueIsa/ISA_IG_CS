@@ -3,7 +3,7 @@ import type { Unit, ViewMode, Term } from '../../types';
 import { TermCard } from '../../components/shared/TermCard';
 import { Flashcard } from '../../components/shared/Flashcard';
 import { qaData } from '../../data/qa';
-import { Shuffle, BookOpen, Layers } from 'lucide-react';
+import { Shuffle, BookOpen, Layers, MessageCircleQuestion } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface GenericUnitViewProps {
@@ -77,6 +77,15 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
               <option key={t} value={t}>{t}</option>
             ))}
           </select>
+
+          <button 
+            className="confusions-toggle"
+            onClick={() => navigate(`/qa?unit=${unit.id}`)}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'white' }}
+          >
+            <MessageCircleQuestion size={16} />
+            Common Questions
+          </button>
 
           <button 
             className={`confusions-toggle ${confusionsOnly ? 'active' : ''}`}
