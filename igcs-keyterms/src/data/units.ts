@@ -138,6 +138,7 @@ export const units: Unit[] = [
     terms: [
       { term: "Internet", topic: "Web", definition: "Global network of interconnected networks." },
       { term: "World Wide Web", topic: "Web", definition: "Interlinked documents and resources accessed via browsers." },
+      { term: "Web browser", topic: "Web", definition: "Software used to retrieve, render and navigate web pages." },
       { term: "URL", topic: "Web", definition: "Uniform Resource Locator identifying a resource." },
       { term: "Domain name", topic: "Web", definition: "Human-readable address of an internet resource." },
       { term: "DNS", topic: "Web", definition: "Domain Name System translating names to IP addresses." },

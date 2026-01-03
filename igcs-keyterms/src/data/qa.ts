@@ -544,7 +544,7 @@ export const qaData: QAData = {
     "Web": [
       {
         question: "Describe the role of DNS in accessing websites.",
-        answer: "DNS translates human-readable domain names into IP addresses to locate servers on the internet.",
+        answer: "Any two from:\nA user enters a URL/domain name in the browser\nThe DNS system is queried to resolve the name\nDNS servers maintain a distributed database of domain names and IP addresses\nIf the local DNS does not have the record, it queries other DNS servers\nThe DNS returns the corresponding IP address to the client\nThe browser uses the IP address to connect to the web server\nDNS may cache results to speed up future lookups",
         paper: "2023 Oct/Nov Paper 22",
         topic: "Web",
         source: "PastPapers.Co",
@@ -555,7 +555,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain the difference between HTTP and HTTPS.",
-        answer: "HTTPS uses TLS/SSL to encrypt communication and verify server identity; HTTP does not provide encryption.",
+        answer: "HTTP:\nData is sent in plain text\n... so it can be intercepted/read by a third party\nDoes not provide authentication of the server\n\nHTTPS:\nUses TLS/SSL to encrypt communication\n... so intercepted data cannot be understood\nVerifies the identity of the web server (via digital certificates)",
         paper: "2024 May/June Paper 21",
         topic: "Web",
         source: "PastPapers.Co",
@@ -574,12 +574,12 @@ export const qaData: QAData = {
         tags: ["explain"],
         marks: 2,
         keywords: ["cookie", "preferences", "tracking", "session"]
-      }
+      },
     ],
     "Security": [
       {
         question: "State two methods to protect users from phishing.",
-        answer: "Examples: educate users to check URLs and certificates, use spam filters, enable two-factor authentication.",
+        answer: "Any two from:\nEducate users to check URLs/email addresses carefully\nUse spam filters to block suspicious emails\nEnable two-factor authentication (2FA)\nDo not click links in unsolicited emails\nCheck for the padlock symbol/HTTPS",
         paper: "2025 Feb/Mar Paper 13",
         topic: "Security",
         source: "PastPapers.Co",
@@ -601,7 +601,7 @@ export const qaData: QAData = {
       },
       {
         question: "Explain the difference between phishing and pharming.",
-        answer: "Phishing involves sending fraudulent emails to trick users into revealing data. Pharming involves malicious code installed on a user's hard drive or web server redirection to a fake website without the user's knowledge.",
+        answer: "Phishing:\nInvolves sending fraudulent emails/messages\n... to trick users into revealing personal data (by clicking links)\n\nPharming:\nInvolves malicious code installed on a user's hard drive or web server\n... which redirects the user to a fake website (even if correct URL is typed)\n... without the user's knowledge",
         paper: "2023 Oct/Nov Paper 22",
         topic: "Security",
         source: "PastPapers.Co",
@@ -620,12 +620,12 @@ export const qaData: QAData = {
         tags: ["explain"],
         marks: 4,
         keywords: ["digital signature", "hash", "private key", "public key", "authenticity"]
-      }
+      },
     ],
     "Communication": [
       {
         question: "Identify a suitable protocol for sending emails and one for retrieving emails.",
-        answer: "SMTP is used to send emails; POP3 or IMAP is used to retrieve/manage emails.",
+        answer: "Sending:\nSMTP (Simple Mail Transfer Protocol)\n\nRetrieving:\nPOP3 (Post Office Protocol)\nIMAP (Internet Message Access Protocol)",
         paper: "2023 May/June Paper 11",
         topic: "Communication",
         source: "PastPapers.Co",
