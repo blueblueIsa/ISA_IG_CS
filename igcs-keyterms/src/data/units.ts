@@ -303,8 +303,7 @@ export const units: Unit[] = [
       { term: "NOR gate", topic: "Logic", definition: "Outputs true only if all inputs are false." },
       { term: "XOR gate", topic: "Logic", definition: "Outputs true if inputs are different." },
       { term: "Truth table", topic: "Logic", definition: "Table listing outputs for all input combinations." },
-      { term: "Boolean expression", topic: "Logic", definition: "Algebraic formula using Boolean variables and operators." },
-      { term: "Simplification", topic: "Logic", definition: "Reducing expressions to simpler equivalent forms." }
+      { term: "Boolean expression", topic: "Logic", definition: "Algebraic formula using Boolean variables and operators." }
     ]
   }
 ];
