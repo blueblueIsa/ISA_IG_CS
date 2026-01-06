@@ -20,33 +20,45 @@ function assignUnitIdByTopic(topic: string, answer: string, keywords: string[] |
   const text = `${a} ${k}`;
   const paperIsP1 = /P1[1-3]$/i.test(paper);
   const paperIsP2 = /P2[1-3]$/i.test(paper);
-  if (!Number.isNaN(num)) {
-    if (paperIsP1) {
-      if (num >= 1 && num <= 6) return `cs-${num}`;
-    } else if (paperIsP2) {
-      if (num === 1) return 'apl-7';
-      if (num >= 2 && num <= 6) return 'apl-8';
-      if (num === 9) return 'apl-9';
-      if (num === 10) return 'apl-10';
-    }
-  }
+
   const qLower = question.toLowerCase();
   const isPseudo = /\bwrite\s+(pseudocode|statement|program)\b/.test(qLower) ||
                    /\b(pseudocode|code|program)\b/.test(k);
-  if (isPseudo) {
-    return 'apl-8';
-  }
-  if (/\bvirtual memory\b/.test(text)) return 'apl-8';
+  const testHit = /\b(parity|checksum|check digit|trace table|dry run|validation|testing)\b/i.test(text);
+  const progHit = /\b(for|while|repeat|until|array|2d array|string|procedure|function|parameter|argument|return|scope)\b/i.test(text);
+  const logicHit = t.includes('logic') || a.includes('truth table') || /\b(and gate|or gate|not gate|nand|nor|xor|truth table|boolean)\b/i.test(text);
+  const sqlHit = t.includes('sql') || t.includes('database') || a.includes('select') || a.includes('join');
+
+  // Forced mappings by keyword
+  if (/\bvirtual memory\b/.test(text)) return 'cs-3';
   if (/\bram\b|\brandom access memory\b/.test(text)) return 'cs-3';
+
+  // Paper 1 numeric mapping to cs-1..6
+  if (!Number.isNaN(num) && paperIsP1) {
+    if (num >= 1 && num <= 6) return `cs-${num}`;
+  }
+
+  // Paper 2 numeric mapping by syllabus section numbers
+  if (!Number.isNaN(num) && paperIsP2) {
+    if (num === 1) return 'apl-7';
+    if (num >= 2 && num <= 6) return 'apl-8';
+    if (num === 9) return 'apl-9';
+    if (num === 10) return 'apl-10';
+  }
+
+  // Content-based mapping (cs-1..5)
   if (t.includes('numbers') || t.includes('text') || t.includes('images') || t.includes('sound') || t.includes('compression') || t.includes('encoding')) return 'cs-1';
   if (t.includes('modes') || t.includes('errors') || t.includes('packets') || t.includes('protocols') || t.includes('control') || t.includes('switching')) return 'cs-2';
   if (t.includes('architecture') || t.includes('memory') || t.includes('storage') || t.includes('i/o') || t.includes('systems') || t.includes('input') || t.includes('output')) return 'cs-3';
   if (t.includes('os') || t.includes('software') || t.includes('languages') || t.includes('libraries') || t.includes('tools') || t.includes('translator')) return 'cs-4';
   if (t.includes('web') || t.includes('security') || t.includes('cloud') || t.includes('communication') || t.includes('email') || t.includes('ftp') || t.includes('dns')) return 'cs-5';
-  if (t.includes('validation') || t.includes('testing') || t.includes('trace')) return 'apl-7';
-  if (t.includes('procedure') || t.includes('function') || t.includes('data type') || t.includes('program')) return 'apl-8';
-  if (t.includes('sql') || t.includes('database') || a.includes('select') || a.includes('join')) return 'apl-9';
-  if (t.includes('logic') || a.includes('truth table') || a.includes('and gate') || a.includes('or gate')) return 'apl-10';
+
+  // APL heuristics (generic)
+  if (t.includes('validation') || t.includes('testing') || t.includes('trace') || testHit) return 'apl-7';
+  if (t.includes('procedure') || t.includes('function') || t.includes('data type') || t.includes('program') || isPseudo || progHit) return 'apl-8';
+  if (sqlHit) return 'apl-9';
+  if (logicHit) return 'apl-10';
+
   return 'apl-7';
 }
 
@@ -57,6 +69,38 @@ function normalizeTopic(answer: string, topic: string): string {
     return 'Lib routines';
   }
   return t;
+}
+
+function canonicalTopicForUnit(unitId: string, topic: string, answer: string): string {
+  const t = topic.toLowerCase();
+  const a = answer.toLowerCase();
+  if (unitId === 'apl-7') {
+    if (t.includes('validation') || t.includes('verification') || t.includes('testing') || t.includes('trace')) return 'Testing';
+    if (t.includes('pseudocode') || t.includes('algorithm')) return 'Algorithms';
+    if (t.includes('life cycle') || t.includes('development') || t.includes('design') || t.includes('flowchart')) return 'Design';
+    return topic;
+  }
+  if (unitId === 'apl-8') {
+    if (t.includes('programming concepts')) return 'Basics';
+    if (t.includes('data type') || t.includes('integer') || t.includes('string') || t.includes('char') || t.includes('real')) return 'Types';
+    if (t.includes('library routines') || /\bround\b|\brandom\b|\bdiv\b|\bmod\b/.test(a)) return 'Lib routines';
+    if (t.includes('file handling') || /\bopenfile|readfile|writefile|closefile\b/.test(a)) return 'File handling';
+    if (/\b(for|while|repeat|until|if|case)\b/.test(a)) return 'Control';
+    if (t.includes('procedure') || t.includes('function') || t.includes('subroutine') || /\b(call|procedure|function)\b/.test(a)) return 'Subroutines';
+    if (t.includes('array') || /\barray\b/.test(a)) return 'Arrays';
+    if (t.includes('operator')) return 'Operators';
+    return topic;
+  }
+  if (unitId === 'apl-9') {
+    if (t.includes('database') || t.includes('sql')) return 'SQL';
+    if (t.includes('primary') || t.includes('key')) return 'Keys';
+    if (t.includes('concept')) return 'Concepts';
+    return topic;
+  }
+  if (unitId === 'apl-10') {
+    return 'Logic';
+  }
+  return topic;
 }
 
 function sanitizeSQL(answer: string): string {
@@ -95,6 +139,12 @@ function shouldSkip(q: RawQuestion): boolean {
   if (s.startsWith('complete paragraph')) return true;
   if (s.startsWith('complete the paragraph')) return true;
   if (s.includes('interrupt process') && s.startsWith('complete')) return true;
+  // New skip conditions
+  if (/\bcircle\b/.test(s)) return true;
+  if (/^identify.*\berrors?\b/.test(s)) return true;
+  if (s.includes('trace table')) return true;
+  const t = q.topic.trim().toLowerCase();
+  if (t.includes('trace table')) return true;
   return false;
 }
 
@@ -110,16 +160,34 @@ export function loadQAFromPapers(): QAData {
     const arr: RawQuestion[] = Array.isArray(data) ? data as RawQuestion[] : extractQuestions(data);
     for (const rq of arr) {
       if (shouldSkip(rq)) continue;
-      const ans = sanitizeSQL(rq.answer);
+      let ans = sanitizeSQL(rq.answer);
+      const isMC = Array.isArray(rq.tags) && rq.tags.some(t => t.toLowerCase() === 'multiple choice');
+      if (isMC) {
+        const firstLine = String(ans).split('\n')[0].trim();
+        const mOpt = /^([A-Z])\s+(.+)$/.exec(firstLine);
+        if (mOpt) {
+          ans = mOpt[2];
+        }
+      }
+      const skipAdvancedDB = /\b(relational database|foreign key|candidate key|erd|entity relationship|integrity)\b/i.test(rq.question) || /\b(relational database|foreign key|candidate key|erd|entity relationship|integrity)\b/i.test(ans);
+      if (skipAdvancedDB) continue;
       const paperCode = normalizePaperCode(rq.paper);
+      if (/^[SMW]25P\d{2}$/i.test(paperCode) || /^\s*2025\b/.test(String(rq.paper))) {
+        continue;
+      }
       const unitId = assignUnitIdByTopic(rq.topic, ans, rq.keywords, paperCode, rq.question);
-      const topicName = normalizeTopic(ans, rq.topic);
+      const topicNameRaw = normalizeTopic(ans, rq.topic);
+      const topicName = canonicalTopicForUnit(unitId, topicNameRaw, ans);
+      const tags = Array.isArray(rq.tags) ? [...rq.tags] : [];
+      if (/^write\s+pseudocode\b/i.test(rq.question) && !tags.map(t => t.toLowerCase()).includes('pseudocode')) {
+        tags.push('pseudocode');
+      }
       const q: Question = {
         question: rq.question,
         answer: ans,
         paper: paperCode,
         topic: topicName,
-        tags: rq.tags,
+        tags,
         marks: rq.marks,
         keywords: rq.keywords,
       };

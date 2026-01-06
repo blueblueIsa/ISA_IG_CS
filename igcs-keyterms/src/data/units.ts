@@ -280,26 +280,11 @@ export const units: Unit[] = [
       { term: "Record", topic: "Concepts", definition: "Single row of related data in a table." },
       { term: "Field", topic: "Concepts", definition: "Single column representing an attribute." },
       { term: "Primary key", topic: "Keys", definition: "Unique identifier for a record." },
-      { term: "Foreign key", topic: "Keys", definition: "Field referencing a primary key in another table." },
-      { term: "Candidate key", topic: "Keys", definition: "Field(s) that could uniquely identify a record." },
-      { term: "Composite key", topic: "Keys", definition: "Key composed of multiple fields." },
-      { term: "Index", topic: "Performance", definition: "Structure improving query speed for a field." },
-      { term: "Flat file", topic: "Concepts", definition: "Single table database without relations." },
-      { term: "Relational database", topic: "Concepts", definition: "Database with tables linked via relationships." },
-      { term: "Entity", topic: "Modelling", definition: "Object or thing represented in a database." },
-      { term: "Attribute", topic: "Modelling", definition: "Property describing an entity." },
-      { term: "Relationship", topic: "Modelling", definition: "Association between entities." },
-      { term: "ERD", topic: "Modelling", definition: "Entity-relationship diagram showing schema." },
-      { term: "Referential integrity", topic: "Integrity", definition: "Ensuring foreign keys reference existing records." },
-      { term: "Normalisation", topic: "Integrity", definition: "Process of designing tables to reduce redundancy." },
-      { term: "1NF", topic: "Integrity", definition: "First normal form: atomic values and unique rows.", example: "Split multiple phone numbers into separate rows." },
       { term: "SQL", topic: "SQL", definition: "Structured Query Language for managing data." },
       { term: "SELECT", topic: "SQL", definition: "Statement to retrieve data from tables." },
       { term: "FROM", topic: "SQL", definition: "Clause specifying the source table." },
       { term: "WHERE", topic: "SQL", definition: "Clause filtering rows by conditions.", example: "SELECT * FROM Students WHERE Age > 15;" },
-      { term: "ORDER BY", topic: "SQL", definition: "Clause sorting results." },
-      { term: "GROUP BY", topic: "SQL", definition: "Clause grouping rows for aggregation." },
-      { term: "JOIN", topic: "SQL", definition: "Combining rows from related tables.", example: "SELECT * FROM A JOIN B ON A.id = B.a_id;" }
+      { term: "ORDER BY", topic: "SQL", definition: "Clause sorting results." }
     ]
   },
   {
@@ -317,7 +302,6 @@ export const units: Unit[] = [
       { term: "NAND gate", topic: "Logic", definition: "Outputs false only if all inputs are true." },
       { term: "NOR gate", topic: "Logic", definition: "Outputs true only if all inputs are false." },
       { term: "XOR gate", topic: "Logic", definition: "Outputs true if inputs are different." },
-      { term: "XNOR gate", topic: "Logic", definition: "Outputs true if inputs are the same." },
       { term: "Truth table", topic: "Logic", definition: "Table listing outputs for all input combinations." },
       { term: "Boolean expression", topic: "Logic", definition: "Algebraic formula using Boolean variables and operators." },
       { term: "Simplification", topic: "Logic", definition: "Reducing expressions to simpler equivalent forms." }

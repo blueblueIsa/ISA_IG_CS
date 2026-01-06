@@ -27,6 +27,14 @@ export const QACard: React.FC<QACardProps> = ({ question }) => {
     return String(question.answer).split('\n');
   }, [question.answer]);
 
+  const isLogic = useMemo(() => {
+    const topic = String(question.topic || '').toLowerCase();
+    const text = `${question.question} ${question.answer}`.toLowerCase();
+    const topicHit = /\b(boolean|logic|truth table|logic gate)\b/.test(topic);
+    const textHit = /\b(truth table|logic gate|boolean)\b/.test(text);
+    return topicHit || textHit;
+  }, [question.topic, question.question, question.answer]);
+
   const highlightLine = (line: string, keywords?: string[]) => {
     if (!keywords || keywords.length === 0) return line;
     const parts: Array<string | React.ReactNode> = [];
@@ -95,6 +103,24 @@ export const QACard: React.FC<QACardProps> = ({ question }) => {
         ))}
         <span className={`chip qa-difficulty-${difficulty}`}>{difficulty}</span>
       </div>
+      {isLogic && (
+        <div style={{ marginBottom: 8 }}>
+          <svg width="260" height="110" viewBox="0 0 260 110">
+            <rect x="10" y="10" width="90" height="40" rx="8" fill="#e0f2fe" stroke="#bae6fd" />
+            <text x="55" y="35" fontSize="12" textAnchor="middle" fill="#0369a1">AND</text>
+            <circle cx="15" cy="30" r="3" fill="#0369a1" />
+            <circle cx="95" cy="30" r="3" fill="#0369a1" />
+            <rect x="160" y="10" width="90" height="40" rx="8" fill="#e0f2fe" stroke="#bae6fd" />
+            <text x="205" y="35" fontSize="12" textAnchor="middle" fill="#0369a1">OR</text>
+            <circle cx="165" cy="30" r="3" fill="#0369a1" />
+            <circle cx="245" cy="30" r="3" fill="#0369a1" />
+            <rect x="10" y="60" width="90" height="40" rx="8" fill="#e0f2fe" stroke="#bae6fd" />
+            <text x="55" y="85" fontSize="12" textAnchor="middle" fill="#0369a1">NOT</text>
+            <circle cx="95" cy="80" r="3" fill="#0369a1" />
+            <circle cx="15" cy="80" r="3" fill="#0369a1" />
+          </svg>
+        </div>
+      )}
       <div className={`qa-answer ${showAnswer ? 'show' : ''}`}>
         {isCode ? (
           <pre className="qa-code"><code>{String(question.answer)}</code></pre>

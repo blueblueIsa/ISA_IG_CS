@@ -178,11 +178,11 @@ nav .group {
   align-items: center;
   gap: 6px;
   padding: 4px 8px;
-  border: 1px solid var(--border);
+  border: 1px solid #bae6fd;
   border-radius: 8px;
   font-size: 12px;
-  color: #334155;
-  background: #f8fafc;
+  color: #0369a1;
+  background: #e0f2fe;
   cursor: pointer;
 }
 
@@ -339,8 +339,8 @@ nav .group {
 }
 
 .flashcard {
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid #fbcfe8;
+  background: #fdf2f8;
   border-radius: 12px;
   padding: 24px;
   min-height: 160px;
@@ -377,8 +377,8 @@ nav .group {
   cursor: pointer;
 }
 .term-card {
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid #bae6fd;
+  background: #f0f9ff;
   border-radius: 12px;
   padding: 16px;
 }
