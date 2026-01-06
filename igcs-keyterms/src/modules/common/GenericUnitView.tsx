@@ -71,9 +71,6 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
             break;
           }
         }
-        if (!assignedTerm) {
-          assignedTerm = (termsForTopic[0] || unit.terms[0]);
-        }
         if (assignedTerm) {
           const name = assignedTerm.term;
           assigned[name] = assigned[name] || new Set<string>();

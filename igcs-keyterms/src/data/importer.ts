@@ -105,7 +105,7 @@ function canonicalTopicForUnit(unitId: string, topic: string, answer: string): s
 
 function sanitizeSQL(answer: string): string {
   const A = answer.toUpperCase();
-  const maybeSQL = /(SELECT|FROM|WHERE|ORDER BY|LIKE|BETWEEN|AND|OR|NOT|COUNT|SUM|AVG|MIN|MAX|GROUP BY|JOIN|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|HAVING)/.test(A);
+  const maybeSQL = /\b(SELECT|FROM|WHERE|ORDER BY)\b/.test(A);
   if (!maybeSQL) return answer;
   const unsupported = [
     'AVG','MIN','MAX','IN','INNER','LEFT','RIGHT','ON','HAVING','GROUP BY',
@@ -143,15 +143,20 @@ function shouldSkip(q: RawQuestion): boolean {
   if (/\bcircle\b/.test(s)) return true;
   if (/^identify.*\berrors?\b/.test(s)) return true;
   if (s.includes('trace table')) return true;
+  if (s.includes('truth table')) return true;
+  if (s.includes('logic circuit')) return true;
   const t = q.topic.trim().toLowerCase();
   if (t.includes('trace table')) return true;
+  if (t.includes('truth table')) return true;
+  if (t.includes('logic circuit')) return true;
   return false;
 }
 
 export function loadQAFromPapers(): QAData {
   const modules = {
     ...import.meta.glob('./papers/*.json', { eager: true }),
-    ...import.meta.glob('./24paper1.json', { eager: true })
+    ...import.meta.glob('./24paper1.json', { eager: true }),
+    ...import.meta.glob('./25paper2.json', { eager: true })
   };
   const out: QAData = {};
   for (const k in modules) {
@@ -172,7 +177,9 @@ export function loadQAFromPapers(): QAData {
       const skipAdvancedDB = /\b(relational database|foreign key|candidate key|erd|entity relationship|integrity)\b/i.test(rq.question) || /\b(relational database|foreign key|candidate key|erd|entity relationship|integrity)\b/i.test(ans);
       if (skipAdvancedDB) continue;
       const paperCode = normalizePaperCode(rq.paper);
-      if (/^[SMW]25P\d{2}$/i.test(paperCode) || /^\s*2025\b/.test(String(rq.paper))) {
+      const is25 = /^[SMW]25P\d{2}$/i.test(paperCode) || /^\s*2025\b/.test(String(rq.paper));
+      const is25examples = /25paper2\.json$/.test(k);
+      if (is25 && !is25examples) {
         continue;
       }
       const unitId = assignUnitIdByTopic(rq.topic, ans, rq.keywords, paperCode, rq.question);

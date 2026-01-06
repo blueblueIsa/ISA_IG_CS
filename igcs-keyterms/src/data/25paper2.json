@@ -1,94 +1,56 @@
 [
   {
-    "topic": "1 Programming concepts",
-    "questions": [
-      {
-        "question": "The following pseudocode algorithm uses a count-controlled loop to read in 10 names and store them in the array Names[]. Rewrite the algorithm in pseudocode, using a condition-controlled loop instead of a count-controlled loop.",
-        "answer": "One mark per bullet point\n• Initialising a count variable outside of loop\n• Correct use of loop with condition for 10 times (WHILE (DO)...ENDMHILE, REPEAT...UNTIL) with close\n• Incrementing the count variable inside the loop\n• Rest of algorithm correct\n\nExamples\nCount ← 1\nREPEAT\nOUTPUT \"Please enter a name\"\nINPUT Name\nNames[Count] ← Name\nCount ← Count + 1\nUNTIL Count > 10\n\nOr\nCount ← 1\nWHILE Count <= 10 DO\nOUTPUT \"Please enter a name\"\nINPUT Name\nNames[Count] ← Name\nCount ← Count + 1\nENDMHILE",
-        "paper": "M/J 2025 P21",
-        "tags": ["pseudocode", "conversion", "iteration"],
-        "marks": 4,
-        "keywords": ["count-controlled loop", "condition-controlled loop", "REPEAT UNTIL", "array"]
-      }
-    ]
+    "question": "Write pseudocode for double entry verification check.",
+    "answer": "INPUT firstEntry\nINPUT secondEntry\nIF firstEntry = secondEntry THEN\n  OUTPUT \"Accepted\"\nELSE\n  OUTPUT \"Mismatch\"\nENDIF",
+    "paper": "S25P21",
+    "topic": "1 Algorithms",
+    "tags": ["pseudocode", "verification"],
+    "marks": 3,
+    "keywords": ["double entry", "verification", "pseudocode", "compare"]
   },
   {
-    "topic": "2 Program development life cycle",
-    "questions": [
-      {
-        "question": "Draw lines on the table to match each stage to its description. The first one has been done for you.",
-        "answer": "One mark for each correct line, max four\nStage - Description\ntesting – making sure the program code works as expected\nanalysis – using structure diagrams, flowcharts and pseudocode to plan the solution\ncoding – using a programming language to create the solution\nleveling the final solution to suggest further developments",
-        "paper": "F/M 2025 P22",
-        "tags": ["matching", "stages", "definitions"],
-        "marks": 4,
-        "keywords": ["testing", "analysis", "coding", "leveling"]
-      }
-    ]
+    "question": "Explain difference between procedure and function using pseudocode.",
+    "answer": "PROCEDURE ShowMenu()\n  OUTPUT \"1) Add\"\n  OUTPUT \"2) Exit\"\nENDPROCEDURE\n\nFUNCTION Square(x)\n  RETURN x * x\nENDFUNCTION\n\n// A procedure performs actions, no return value\n// A function returns a value",
+    "paper": "S25P22",
+    "topic": "2 Programming concepts",
+    "tags": ["explain", "pseudocode"],
+    "marks": 3,
+    "keywords": ["procedure", "function", "return value", "pseudocode"]
   },
   {
-    "topic": "3 Data validation and verification",
-    "questions": [
-      {
-        "question": "What is the purpose of a presence check?",
-        "answer": "To check that a value has been entered.",
-        "paper": "F/M 2025 P22",
-        "tags": ["definition", "concept"],
-        "marks": 1,
-        "keywords": ["presence check", "purpose"]
-      },
-      {
-        "question": "Write the validation check used in the algorithm.",
-        "answer": "Type (check)",
-        "paper": "F/M 2025 P22",
-        "tags": ["identification"],
-        "marks": 1,
-        "keywords": ["validation check", "type check"]
-      },
-      {
-        "question": "Write an algorithm, using pseudocode, that validates the user's input as an integer. Include a condition-controlled loop that continues until the input is an integer. You do not need to declare variables.",
-        "answer": "One mark per mark point, max five\nCondition controlled loop used\nInput of value into declared variable\nUse of selection to test if input is an integer\nAppropriate use of error message\nCorrect condition used to exit/terminate loop\n\nFor example\nREPEAT\nINPUT Number\nIF MOD (Number, 1) <> 0\nTHEN\nOUTPUT \"Please try again\"\nENDIF\nUNTIL MOD (Number, 1) = 0\n\nAlternative with use of DIV e.g. IF DIV(Number, 2) <> Number /2 is acceptable",
-        "paper": "F/M 2025 P22",
-        "tags": ["pseudocode", "algorithm", "validation"],
-        "marks": 5,
-        "keywords": ["integer validation", "condition-controlled loop", "MOD", "error message"]
-      },
-      {
-        "question": "A range check is used to validate that the input temperature is an integer between –100 and 0, inclusive. Suggest suitable normal, abnormal, extreme and boundary test data to test if this validation check is working correctly.",
-        "answer": "One mark per correct piece of test data, Normal test data: -50 (any integer value between 0 and -100, inclusive) Abnormal test data: 50 (any value outside the range 0 and -100, inclusive, or any non-numeric input and non-integers Extreme test data: 0 // -100 Boundary test data: 1 // 0 // -100 // -101",
-        "paper": "M/J 2025 P22",
-        "tags": ["test data", "examples", "validation"],
-        "marks": 4,
-        "keywords": ["normal", "abnormal", "extreme", "boundary", "range check"]
-      },
-      {
-        "question": "An input must be an integer between 10 and 95, inclusive. Suggest suitable abnormal and extreme test data for an integer between 10 and 95 inclusive, and give a reason for each of your choices.",
-        "answer": "One mark per correct piece of test data, max two\nOne mark per correct reason, max two\nAbnormal test data: 150 (any non-integer or any value outside the range 10 and 95)\nReason: This data is out of range so should be rejected\nExtreme test data: 10 // 95\nReason: This is the smallest data entry that will be accepted // This is the largest data entry that will be accepted.",
-        "paper": "M/J 2025 P23",
-        "tags": ["test data", "examples", "reasons", "validation"],
-        "marks": 4,
-        "keywords": ["abnormal", "extreme", "reason", "integer range"]
-      }
-    ]
+    "question": "Write pseudocode to validate integer input between 1 and 100 inclusive.",
+    "answer": "REPEAT\n  INPUT n\nUNTIL n >= 1 AND n <= 100",
+    "paper": "W25P21",
+    "topic": "7 Testing and validation",
+    "tags": ["pseudocode", "validation"],
+    "marks": 2,
+    "keywords": ["validation", "range check", "repeat until", "integer"]
   },
   {
-    "topic": "4 Logic expressions and logic gates",
-    "questions": [
-      {
-        "question": "Draw a logic circuit that could have been used to produce this flowchart.",
-        "answer": "One mark for each correct gate, with the correct input(s) as shown.\nA\nB\nC\nZ",
-        "paper": "F/M 2025 P22",
-        "tags": ["logic circuit", "drawing"],
-        "marks": 5,
-        "keywords": ["logic circuit", "gates", "flowchart"]
-      },
-      {
-        "question": "Complete the trace table for the logic circuit.",
-        "answer": "Four marks for eight correct outputs\nThree marks for six or seven correct outputs\nTwo marks for four or five correct outputs\nOne mark for two or three correct outputs",
-        "paper": "F/M 2025 P22",
-        "tags": ["truth table", "logic circuit"],
-        "marks": 4,
-        "keywords": ["truth table", "logic circuit", "outputs"]
-      }
-    ]
+    "question": "Write pseudocode to search for a value in an array and output its index or -1.",
+    "answer": "INPUT target\nindex <- -1\nFOR i <- 1 TO 100\n  IF array[i] = target THEN\n    index <- i\n  ENDIF\nNEXT i\nOUTPUT index",
+    "paper": "M25P21",
+    "topic": "4 Arrays and loops",
+    "tags": ["pseudocode", "array", "search"],
+    "marks": 3,
+    "keywords": ["array", "linear search", "index", "loop"]
+  },
+  {
+    "question": "Write an SQL query to list StudentName and Age from Students where Age >= 16 sorted by StudentName.",
+    "answer": "SELECT StudentName, Age\nFROM Students\nWHERE Age >= 16\nORDER BY StudentName",
+    "paper": "S25P29",
+    "topic": "9 Databases and SQL",
+    "tags": ["sql", "select", "order by"],
+    "marks": 3,
+    "keywords": ["SQL", "SELECT", "FROM", "WHERE", "ORDER BY", "Students"]
+  },
+  {
+    "question": "Explain primary key and give one reason why it is important.",
+    "answer": "A primary key uniquely identifies each record in a table.\nIt prevents duplicate records and supports efficient searching.",
+    "paper": "W25P29",
+    "topic": "9 Databases and SQL",
+    "tags": ["explain", "keys"],
+    "marks": 2,
+    "keywords": ["primary key", "unique", "record", "table"]
   }
 ]
