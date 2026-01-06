@@ -319,6 +319,19 @@ nav .group {
   font-size: 13px;
   cursor: pointer;
 }
+
+.qa-code {
+  border: 1px solid var(--border);
+  background: #0b1021;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 .flashcards {
   display: flex;
   flex-direction: column;

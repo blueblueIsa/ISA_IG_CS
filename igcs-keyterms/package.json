@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "normalize:papers": "node scripts/normalizePaperCodes.mjs",
+    "convert:paper2": "node scripts/convertPaper2.mjs",
+    "convert:paper1": "node scripts/convertPaper1.mjs"
   },
   "dependencies": {
     "classnames": "^2.5.1",

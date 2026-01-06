@@ -150,15 +150,8 @@ export const units: Unit[] = [
       { term: "JavaScript", topic: "Web", definition: "Programming language for dynamic web content." },
       { term: "ISP", topic: "Web", definition: "Internet Service Provider offering connectivity." },
       { term: "Email", topic: "Communication", definition: "Electronic mail system for messages." },
-      { term: "SMTP", topic: "Communication", definition: "Simple Mail Transfer Protocol for sending email." },
-      { term: "POP3", topic: "Communication", definition: "Post Office Protocol for retrieving email." },
-      { term: "IMAP", topic: "Communication", definition: "Internet Message Access Protocol for managing email." },
       { term: "FTP", topic: "Communication", definition: "File Transfer Protocol for moving files." },
       { term: "Cookie", topic: "Web", definition: "Small data stored by a browser for a website." },
-      { term: "Cloud computing", topic: "Cloud", definition: "Delivery of computing services over the internet." },
-      { term: "SaaS", topic: "Cloud", definition: "Software as a Service delivered via internet." },
-      { term: "PaaS", topic: "Cloud", definition: "Platform as a Service for application deployment." },
-      { term: "IaaS", topic: "Cloud", definition: "Infrastructure as a Service providing compute/storage." },
       { term: "Firewall", topic: "Security", definition: "Network security system controlling traffic." },
       { term: "Malware", topic: "Security", definition: "Malicious software designed to cause harm." },
       { term: "Phishing", topic: "Security", definition: "Fraudulent attempt to obtain sensitive information." },
@@ -170,8 +163,6 @@ export const units: Unit[] = [
       { term: "Digital certificate", topic: "Security", definition: "Electronic document verifying identity and public key." },
       { term: "Digital signature", topic: "Security", definition: "Cryptographic proof of content integrity and origin." },
       { term: "Authentication", topic: "Security", definition: "Verifying user identity." },
-      { term: "Two-factor authentication", topic: "Security", definition: "Authentication using two independent methods." },
-      { term: "VPN", topic: "Security", definition: "Virtual private network providing secure tunnelling." },
       { term: "Proxy server", topic: "Security", definition: "Intermediate server forwarding requests." }
     ]
   },
@@ -271,7 +262,10 @@ export const units: Unit[] = [
       { term: "Argument", topic: "Procedures", definition: "Actual value passed to a subroutine." },
       { term: "Return value", topic: "Procedures", definition: "Data sent back from a function to the caller." },
       { term: "Scope", topic: "Procedures", definition: "Visibility of variables (local/global)." },
-      { term: "Library", topic: "Procedures", definition: "Reusable set of prewritten functions." }
+      { term: "ROUND", topic: "Lib routines", definition: "Rounds a number to a specified number of decimal places." },
+      { term: "RANDOM", topic: "Lib routines", definition: "Generates a random number within a specified range." },
+      { term: "DIV", topic: "Lib routines", definition: "Integer division operator returning the quotient." },
+      { term: "MOD", topic: "Lib routines", definition: "Modulo operator returning the remainder after division." }
     ]
   },
   {
@@ -326,7 +320,6 @@ export const units: Unit[] = [
       { term: "XNOR gate", topic: "Logic", definition: "Outputs true if inputs are the same." },
       { term: "Truth table", topic: "Logic", definition: "Table listing outputs for all input combinations." },
       { term: "Boolean expression", topic: "Logic", definition: "Algebraic formula using Boolean variables and operators." },
-      { term: "De Morgan’s laws", topic: "Logic", definition: "Rules for negating compound Boolean expressions." },
       { term: "Simplification", topic: "Logic", definition: "Reducing expressions to simpler equivalent forms." }
     ]
   }

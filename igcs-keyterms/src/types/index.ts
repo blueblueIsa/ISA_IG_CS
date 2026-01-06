@@ -21,8 +21,6 @@ export interface Question {
   answer: string;
   paper: string;
   topic: string;
-  source: string;
-  link: string;
   tags?: string[];
   marks?: number;
   keywords?: string[];

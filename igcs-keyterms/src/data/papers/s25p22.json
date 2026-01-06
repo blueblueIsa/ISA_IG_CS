@@ -1,0 +1,74 @@
+[
+  {
+    "question": "Tick (✓) one box to complete description of abstraction.",
+    "answer": "D removing details from the problem that are not relevant",
+    "paper": "M25P22",
+    "topic": "1 Abstraction and decomposition",
+    "tags": ["multiple choice"],
+    "marks": 1,
+    "keywords": ["abstraction", "removing details"]
+  },
+  {
+    "question": "Draw one line from component part to description.",
+    "answer": "input → height and length\nprocess → calculate area\noutput → area result",
+    "paper": "M25P22",
+    "topic": "1 Abstraction and decomposition",
+    "tags": ["matching"],
+    "marks": 3,
+    "keywords": ["input", "process", "output"]
+  },
+  {
+    "question": "Suggest test data for temperature range –100 to 0.",
+    "answer": "Normal: –50\nAbnormal: 50\nExtreme: –200\nBoundary: –100 and 0",
+    "paper": "M25P22",
+    "topic": "2 Test data",
+    "tags": ["test data"],
+    "marks": 4,
+    "keywords": ["normal", "abnormal", "extreme", "boundary"]
+  },
+  {
+    "question": "State one reason for using verification check.",
+    "answer": "To ensure data is entered correctly (e.g., no typing mistakes).",
+    "paper": "M25P22",
+    "topic": "3 Verification",
+    "tags": ["short answer"],
+    "marks": 1,
+    "keywords": ["verification", "accuracy"]
+  },
+  {
+    "question": "Write pseudocode for double entry verification check.",
+    "answer": "Use FOR loop to input 10 numbers, store in array, then input again and compare.",
+    "paper": "M25P22",
+    "topic": "3 Verification",
+    "tags": ["pseudocode"],
+    "marks": 6,
+    "keywords": ["double entry", "array", "comparison"]
+  },
+  {
+    "question": "Identify five errors in height calculation algorithm.",
+    "answer": "Line 1: Names array should be STRING\nLine 7: Shortest should be 0\nLine 9: Total should be 0\nLine 11: Index should be Counter\nLine 20: should output Shortest not Heights",
+    "paper": "M25P22",
+    "topic": "4 Pseudocode debugging",
+    "tags": ["debugging"],
+    "marks": 5,
+    "keywords": ["array type", "initialization", "output"]
+  },
+  {
+    "question": "Write statement to output average height rounded to 1 decimal.",
+    "answer": "OUTPUT ROUND(Total / 500, 1)",
+    "paper": "M25P22",
+    "topic": "5 Output formatting",
+    "tags": ["pseudocode"],
+    "marks": 2,
+    "keywords": ["ROUND", "average"]
+  },
+  {
+    "question": "Explain how to also find tallest person.",
+    "answer": "Add variable Tallest, compare in loop, update if height > Tallest.",
+    "paper": "M25P22",
+    "topic": "6 Algorithm extension",
+    "tags": ["explanation"],
+    "marks": 4,
+    "keywords": ["tallest", "comparison", "loop"]
+  }
+]

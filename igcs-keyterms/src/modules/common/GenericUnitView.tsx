@@ -5,6 +5,7 @@ import { Flashcard } from '../../components/shared/Flashcard';
 import { qaData } from '../../data/qa';
 import { Shuffle, BookOpen, Layers, MessageCircleQuestion } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import type { Question } from '../../types';
 
 interface GenericUnitViewProps {
   unit: Unit;
@@ -41,18 +42,53 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
 
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
+  const assignedMap = useMemo(() => {
+    const unitQA = qaData[unit.id] || {};
+    const byTopic: Record<string, Question[]> = {};
+    for (const t of Object.keys(unitQA)) {
+      byTopic[t] = unitQA[t] || [];
+    }
+    const assigned: Record<string, Set<string>> = {}; // term.term -> keys
+    const termOrderByTopic: Record<string, Term[]> = {};
+    for (const t of Array.from(new Set(unit.terms.map(x => x.topic)))) {
+      termOrderByTopic[t] = unit.terms.filter(x => x.topic === t);
+    }
+    for (const t of Object.keys(byTopic)) {
+      const questions = byTopic[t];
+      const termsForTopic = termOrderByTopic[t] || [];
+      for (const q of questions) {
+        const key = `${q.paper}::${q.question.trim()}`;
+        let assignedTerm: Term | undefined;
+        const pool = termsForTopic.length > 0 ? termsForTopic : unit.terms;
+        for (const term of pool) {
+          const k = term.term;
+          const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const re = new RegExp(`\\b${escaped}\\b`, 'i');
+          const inText = re.test(q.question) || re.test(q.answer);
+          const inKeywords = Array.isArray(q.keywords) && q.keywords.some(w => re.test(w));
+          if (inText || inKeywords) {
+            assignedTerm = term;
+            break;
+          }
+        }
+        if (!assignedTerm) {
+          assignedTerm = (termsForTopic[0] || unit.terms[0]);
+        }
+        if (assignedTerm) {
+          const name = assignedTerm.term;
+          assigned[name] = assigned[name] || new Set<string>();
+          if (![...assigned[name]].includes(key)) {
+            assigned[name].add(key);
+          }
+        }
+      }
+    }
+    return assigned;
+  }, [unit, qaData]);
+
   const hasRelatedQA = (term: Term) => {
-    const unitQA = qaData[unit.id];
-    if (!unitQA) return false;
-    
-    const questions = unitQA[term.topic] || [];
-    const k = term.term.toLowerCase();
-    
-    return questions.some(q => {
-      const inText = q.question.toLowerCase().includes(k) || q.answer.toLowerCase().includes(k);
-      const inKeywords = Array.isArray(q.keywords) && q.keywords.some(w => w.toLowerCase().includes(k));
-      return inText || inKeywords;
-    });
+    const set = assignedMap[term.term];
+    return set && set.size > 0;
   };
 
   return (
@@ -126,19 +162,29 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
 
       {viewMode === 'list' ? (
         <div className="terms">
-          {filteredTerms.map((term, i) => (
-            <TermCard 
-              key={i} 
-              term={term} 
-              onViewQA={hasRelatedQA(term) ? (keyword) => {
-                const params = new URLSearchParams();
-                params.set('unit', unit.id);
-                params.set('topic', term.topic);
-                params.set('q', keyword);
-                navigate(`/qa?${params.toString()}`);
-              } : undefined}
-            />
-          ))}
+          {Array.from(new Set(filteredTerms.map(t => t.topic))).map(topicName => {
+            const group = filteredTerms.filter(t => t.topic === topicName);
+            return (
+              <div key={topicName} style={{ gridColumn: '1/-1' }}>
+                <h2 style={{ marginTop: 24, marginBottom: 8 }}>{topicName}</h2>
+                <div className="terms">
+                  {group.map((term, i) => (
+                    <TermCard
+                      key={`${topicName}-${i}`}
+                      term={term}
+                      onViewQA={hasRelatedQA(term) ? (keyword) => {
+                        const params = new URLSearchParams();
+                        params.set('unit', unit.id);
+                        params.set('topic', term.topic);
+                        params.set('q', keyword);
+                        navigate(`/qa?${params.toString()}`);
+                      } : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
           {filteredTerms.length === 0 && (
             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: 'var(--muted)' }}>
               No terms found matching your filters.

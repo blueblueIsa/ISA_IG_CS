@@ -14,6 +14,15 @@ export const QACard: React.FC<QACardProps> = ({ question }) => {
     return 'hard';
   }, [question.marks]);
 
+  const isCode = useMemo(() => {
+    const tags = Array.isArray(question.tags) ? question.tags.map(t => t.toLowerCase()) : [];
+    const tHit = tags.includes('pseudocode') || tags.includes('code') || tags.includes('programming') || tags.includes('pseudocode / programming');
+    const a = String(question.answer);
+    const kw = ['IF', 'THEN', 'ELSE', 'ELSEIF', 'WHILE', 'FOR', 'REPEAT', 'UNTIL', 'FUNCTION', 'PROCEDURE', 'CALL', 'RETURN', 'INPUT', 'OUTPUT', ':=', '<-', 'TRUE', 'FALSE'];
+    const kHit = kw.some(k => new RegExp(`\\b${k}\\b`, 'i').test(a)) || /;/.test(a) || /BEGIN|END/i.test(a);
+    return tHit || kHit;
+  }, [question.tags, question.answer]);
+
   const lines = useMemo(() => {
     return String(question.answer).split('\n');
   }, [question.answer]);
@@ -87,32 +96,32 @@ export const QACard: React.FC<QACardProps> = ({ question }) => {
         <span className={`chip qa-difficulty-${difficulty}`}>{difficulty}</span>
       </div>
       <div className={`qa-answer ${showAnswer ? 'show' : ''}`}>
-        {lines.map((line, idx) => {
-          const isHeader = isHeaderLine(line);
-          const showBullet = lines.length > 1 && !isHeader;
-          
-          return (
-            <div key={idx} className={`qa-line qa-line-${difficulty}`}>
-              {showBullet ? (
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <span style={{ userSelect: 'none', color: '#64748b' }}>-</span>
-                  <span style={{ flex: 1 }}>{highlightLine(line, question.keywords)}</span>
-                </div>
-              ) : (
-                <div style={isHeader ? { fontWeight: 600 } : undefined}>
-                  {highlightLine(line, question.keywords)}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {isCode ? (
+          <pre className="qa-code"><code>{String(question.answer)}</code></pre>
+        ) : (
+          lines.map((line, idx) => {
+            const isHeader = isHeaderLine(line);
+            const showBullet = lines.length > 1 && !isHeader;
+            return (
+              <div key={idx} className={`qa-line qa-line-${difficulty}`}>
+                {showBullet ? (
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <span style={{ userSelect: 'none', color: '#64748b' }}>-</span>
+                    <span style={{ flex: 1 }}>{highlightLine(line, question.keywords)}</span>
+                  </div>
+                ) : (
+                  <div style={isHeader ? { fontWeight: 600 } : undefined}>
+                    {highlightLine(line, question.keywords)}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
       </div>
       <div className="qa-actions">
         <button onClick={() => setShowAnswer(!showAnswer)}>
           {showAnswer ? 'Hide Answer' : 'Show Answer'}
-        </button>
-        <button onClick={() => window.open(question.link, '_blank')}>
-          Source
         </button>
       </div>
     </div>
