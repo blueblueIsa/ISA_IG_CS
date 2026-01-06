@@ -61,10 +61,10 @@ function normalizeTopic(answer: string, topic: string): string {
 
 function sanitizeSQL(answer: string): string {
   const A = answer.toUpperCase();
-  const maybeSQL = /(SELECT|FROM|WHERE|ORDER BY|LIKE|BETWEEN|AND|OR|IN|NOT|COUNT|SUM|AVG|MIN|MAX|GROUP BY|JOIN|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|HAVING)/.test(A);
+  const maybeSQL = /(SELECT|FROM|WHERE|ORDER BY|LIKE|BETWEEN|AND|OR|NOT|COUNT|SUM|AVG|MIN|MAX|GROUP BY|JOIN|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|HAVING)/.test(A);
   if (!maybeSQL) return answer;
   const unsupported = [
-    'INNER','LEFT','RIGHT','ON','HAVING','GROUP BY',
+    'AVG','MIN','MAX','IN','INNER','LEFT','RIGHT','ON','HAVING','GROUP BY',
     'INSERT','UPDATE','DELETE','CREATE','DROP','ALTER','TRIGGER','PROCEDURE','VIEW',
     'GRANT','REVOKE','UNION','INTERSECT'
   ];
@@ -87,7 +87,6 @@ function normalizePaperCode(paper: string): string {
   const num = m[3];
   const yy = year.slice(2);
   const code = season === 'may/june' ? 'S' : season === 'oct/nov' ? 'W' : 'M';
-  console.log("code: ", code);
   return `${code}${yy}P${num}`;
 }
 function shouldSkip(q: RawQuestion): boolean {
@@ -100,12 +99,15 @@ function shouldSkip(q: RawQuestion): boolean {
 }
 
 export function loadQAFromPapers(): QAData {
-  const modules = import.meta.glob('./papers/*.json', { eager: true });
+  const modules = {
+    ...import.meta.glob('./papers/*.json', { eager: true }),
+    ...import.meta.glob('./24paper1.json', { eager: true })
+  };
   const out: QAData = {};
   for (const k in modules) {
     const mod = modules[k] as unknown;
     const data = (mod as { default?: unknown })?.default ?? mod;
-    const arr: RawQuestion[] = Array.isArray(data) ? data as RawQuestion[] : [];
+    const arr: RawQuestion[] = Array.isArray(data) ? data as RawQuestion[] : extractQuestions(data);
     for (const rq of arr) {
       if (shouldSkip(rq)) continue;
       const ans = sanitizeSQL(rq.answer);
@@ -129,5 +131,27 @@ export function loadQAFromPapers(): QAData {
       if (!exists) bucket.push(q);
     }
   }
+  return out;
+}
+
+function extractQuestions(input: unknown): RawQuestion[] {
+  const out: RawQuestion[] = [];
+  const visit = (node: unknown) => {
+    if (!node) return;
+    if (Array.isArray(node)) {
+      for (const item of node) visit(item);
+      return;
+    }
+    if (typeof node === 'object') {
+      const obj = node as Record<string, unknown>;
+      if ('question' in obj && 'answer' in obj && 'paper' in obj && 'topic' in obj) {
+        out.push(obj as unknown as RawQuestion);
+      }
+      for (const key of Object.keys(obj)) {
+        visit(obj[key]);
+      }
+    }
+  };
+  visit(input);
   return out;
 }

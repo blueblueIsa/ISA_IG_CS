@@ -12,8 +12,9 @@ export const QAView: React.FC = () => {
 
   const unitQA = qaData[selectedUnitId] || {};
   const topics = Object.keys(unitQA);
-  
-  const filteredQuestions = (selectedTopic ? (unitQA[selectedTopic] || []) : Object.values(unitQA).flat()).filter(q => {
+  const hasTopicData = selectedTopic && Array.isArray(unitQA[selectedTopic]) && (unitQA[selectedTopic]!.length > 0);
+  const sourceQuestions = hasTopicData ? (unitQA[selectedTopic] || []) : Object.values(unitQA).flat();
+  const filteredQuestions = sourceQuestions.filter(q => {
     const k = keyword.trim().toLowerCase();
     if (!k) return true;
     const inText = q.question.toLowerCase().includes(k) || q.answer.toLowerCase().includes(k);
@@ -21,13 +22,20 @@ export const QAView: React.FC = () => {
     return inText || inKeywords;
   });
 
+  React.useEffect(() => {
+    if (selectedTopic && !hasTopicData) {
+      setSelectedTopic('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedUnitId]);
+
   useEffect(() => {
     const params = new URLSearchParams();
     params.set('unit', selectedUnitId);
-    if (selectedTopic) params.set('topic', selectedTopic);
+    if (selectedTopic && hasTopicData) params.set('topic', selectedTopic);
     if (keyword) params.set('q', keyword);
     setSearchParams(params, { replace: true });
-  }, [selectedUnitId, selectedTopic, keyword, setSearchParams]);
+  }, [selectedUnitId, selectedTopic, keyword, setSearchParams, hasTopicData]);
 
   return (
     <div>

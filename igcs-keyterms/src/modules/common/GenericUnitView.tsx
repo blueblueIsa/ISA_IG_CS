@@ -175,7 +175,6 @@ export const GenericUnitView: React.FC<GenericUnitViewProps> = ({ unit }) => {
                       onViewQA={hasRelatedQA(term) ? (keyword) => {
                         const params = new URLSearchParams();
                         params.set('unit', unit.id);
-                        params.set('topic', term.topic);
                         params.set('q', keyword);
                         navigate(`/qa?${params.toString()}`);
                       } : undefined}
